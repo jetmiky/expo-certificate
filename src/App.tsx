@@ -1,3 +1,6 @@
+// Components
+import Button from "./components/Button";
+
 function App() {
   return (
     <main className="min-h-screen w-full flex-center flex-col">
@@ -10,7 +13,7 @@ function App() {
         <label htmlFor="certificateCode">Nomor Sertifikat</label>
         <input id="certificateCode" name="certificateCode" type="text" />
 
-        <button type="submit">Cek Sertifikat</button>
+        <Button>Cek Sertifikat</Button>
       </form>
     </main>
   );
