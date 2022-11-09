@@ -1,6 +1,6 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faFacebook } from "@fortawesome/free-brands-svg-icons";
+import { faYoutube, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 export default function initializeIcon() {
-  return library.add(faFacebook);
+  return library.add(faInstagram, faYoutube);
 }
