@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 
 // Configs
 import initializeIcon from "./config/icons";
@@ -16,7 +16,12 @@ import logo from "./assets/logo.png";
 initializeIcon();
 
 function App() {
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const handleSearch = (e: FormEvent) => {
+    e.preventDefault();
+
+    setShowModal(true);
+  };
 
   return (
     <div className="min-h-screen w-full flex items-center justify-between flex-col">
@@ -40,6 +45,7 @@ function App() {
           <form
             className="col-start-2 col-span-2 md:col-start-3"
             autoComplete="off"
+            onSubmit={handleSearch}
           >
             <div className="pt-8 pb-5">
               <Input id="certificate-code" label="Nomor Sertifikat" />
