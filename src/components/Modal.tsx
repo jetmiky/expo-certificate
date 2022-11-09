@@ -38,10 +38,8 @@ export default function Modal({
                 </span>
               </button>
             </div>
-            <div className="relative px-6">
-              <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                {children}
-              </p>
+            <div className="relative px-6 py-4 text-slate-500 text-lg">
+              {children}
             </div>
             <div className="flex items-center justify-end px-6 py-4 border-t border-solid border-slate-200 rounded-b">
               <Button onClick={handleCloseModal}>Close</Button>
