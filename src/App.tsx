@@ -1,8 +1,11 @@
+import { useState } from "react";
+
 // Configs
 import initializeIcon from "./config/icons";
 import social from "./config/social";
 
 // Components
+import Modal from "./components/Modal";
 import Input from "./components/Input";
 import Button from "./components/Button";
 import SocialLink from "./components/SocialLink";
@@ -13,6 +16,8 @@ import logo from "./assets/logo.png";
 initializeIcon();
 
 function App() {
+  const [showModal, setShowModal] = useState(true);
+
   return (
     <div className="min-h-screen w-full flex items-center justify-between flex-col">
       <header className="pt-5 container">
@@ -61,6 +66,12 @@ function App() {
           />
         </div>
       </footer>
+
+      {showModal && (
+        <Modal onToggle={setShowModal} title="Cek Sertifikat">
+          Modal content should goes here.
+        </Modal>
+      )}
     </div>
   );
 }
