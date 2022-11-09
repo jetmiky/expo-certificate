@@ -1,4 +1,5 @@
 // Components
+import Input from "./components/Input";
 import Button from "./components/Button";
 
 function App() {
@@ -12,6 +13,8 @@ function App() {
       <form>
         <label htmlFor="certificateCode">Nomor Sertifikat</label>
         <input id="certificateCode" name="certificateCode" type="text" />
+
+        <Input id="certificate-code" label="Nomor Sertifikat" />
 
         <Button>Cek Sertifikat</Button>
       </form>
