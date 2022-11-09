@@ -11,10 +11,17 @@ interface Props {
 }
 
 export default function Modal({
+  onCallback,
   onToggle,
   title,
   children,
 }: Props): JSX.Element {
+  const handleCloseModal = () => {
+    if (!!onCallback) onCallback();
+
+    onToggle(false);
+  };
+
   return (
     <>
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
@@ -37,12 +44,12 @@ export default function Modal({
               </p>
             </div>
             <div className="flex items-center justify-end px-6 py-4 border-t border-solid border-slate-200 rounded-b">
-              <Button>Save Changes</Button>
+              <Button onClick={handleCloseModal}>Close</Button>
             </div>
           </div>
         </div>
       </div>
-      <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+      <div className="opacity-50 fixed inset-0 z-40 bg-black"></div>
     </>
   );
 }
