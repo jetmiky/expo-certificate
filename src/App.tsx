@@ -5,19 +5,27 @@ import Button from "./components/Button";
 function App() {
   return (
     <main className="min-h-screen w-full flex-center flex-col">
-      <h1 className="text-center">Cek Sertifikat</h1>
-      <p className="text-center text-gray-400">
-        Cek keaslian sertifikat webinar Profesi Keuangan Expo
-      </p>
+      <div className="container">
+        <h1 className="text-center mb-1">Cek Sertifikat</h1>
+        <p className="text-center text-gray-400 px-10">
+          Cek keaslian sertifikat webinar Profesi Keuangan Expo
+        </p>
 
-      <form>
-        <label htmlFor="certificateCode">Nomor Sertifikat</label>
-        <input id="certificateCode" name="certificateCode" type="text" />
+        <div className="grid grid-cols-4 gap-2 md:grid-cols-6">
+          <form
+            className="col-start-2 col-span-2 md:col-start-3"
+            autoComplete="off"
+          >
+            <div className="pt-8 pb-5">
+              <Input id="certificate-code" label="Nomor Sertifikat" />
+            </div>
 
-        <Input id="certificate-code" label="Nomor Sertifikat" />
-
-        <Button>Cek Sertifikat</Button>
-      </form>
+            <div className="flex-center">
+              <Button>Cek Sertifikat</Button>
+            </div>
+          </form>
+        </div>
+      </div>
     </main>
   );
 }
