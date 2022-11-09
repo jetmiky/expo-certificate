@@ -3,7 +3,7 @@ import { IconName } from "@fortawesome/fontawesome-common-types";
 
 interface Props {
   icon: IconName;
-  hoverColor: string;
+  hoverColor: "red" | "indigo";
   url: string;
 }
 
@@ -12,10 +12,17 @@ export default function SocialLink({
   icon,
   hoverColor,
 }: Props): JSX.Element {
+  const classes =
+    hoverColor === "red"
+      ? "hover:text-red-900"
+      : hoverColor === "indigo"
+      ? "hover:text-indigo-900"
+      : "";
+
   return (
     <a
       href={url}
-      className={`text-gray-500 hover:text-${hoverColor}-900 transition-color duration-300`}
+      className={`${classes} text-gray-500 transition-color duration-300`}
       target="_blank"
     >
       <FontAwesomeIcon icon={["fab", icon]} size="lg" />
