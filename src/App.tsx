@@ -22,14 +22,19 @@ initializeIcon();
 
 function App() {
   const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSearch = async (e: FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       const result = await search();
       setShowModal(true);
-    } catch {}
+    } catch {
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -61,7 +66,7 @@ function App() {
             </div>
 
             <div className="flex-center">
-              <Button>Cek Sertifikat</Button>
+              <Button isLoading={isLoading}>Cek Sertifikat</Button>
             </div>
           </form>
         </div>
