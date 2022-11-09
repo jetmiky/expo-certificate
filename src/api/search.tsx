@@ -1,5 +1,3 @@
-export function search(): Promise<void> {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(), 3000);
-  });
+export function search(status: number): Promise<Response> {
+  return fetch(`https://httpstat.us/${status}`);
 }
