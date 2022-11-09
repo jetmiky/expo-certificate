@@ -22,16 +22,25 @@ initializeIcon();
 
 function App() {
   const [showModal, setShowModal] = useState(false);
+
   const [isLoading, setIsLoading] = useState(false);
+  const [searchResult, setSearchResult] = useState({});
 
   const handleSearch = async (e: FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      const result = await search();
+      const response = await search(200);
+      if (response.status !== 200 && response.status !== 404) {
+        throw Error("Server error.");
+      }
+
       setShowModal(true);
-    } catch {
+      setSearchResult(response.json());
+    } catch (error) {
+      console.log(error);
+      alert("We are sorry, unexpected error happened.");
     } finally {
       setIsLoading(false);
     }
@@ -87,7 +96,9 @@ function App() {
         </div>
       </footer>
 
-      {showModal && <ModalResult onToggle={setShowModal} isSuccess={true} />}
+      {showModal && (
+        <ModalResult onToggle={setShowModal} searchResult={searchResult} />
+      )}
     </div>
   );
 }

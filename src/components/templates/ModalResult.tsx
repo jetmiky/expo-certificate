@@ -4,13 +4,23 @@ import Alert from "../Alert";
 
 interface Props {
   onToggle: Function;
-  isSuccess: boolean;
+  searchResult: Result;
+}
+
+interface Result {
+  id?: string;
+  name?: string;
+  title?: string;
+  duration?: string;
+  event?: string;
 }
 
 export default function ModalResult({
   onToggle,
-  isSuccess,
+  searchResult,
 }: Props): JSX.Element {
+  const isSuccess = !!searchResult.name;
+
   return (
     <Modal onToggle={onToggle} title="Cek Sertifikat">
       {isSuccess ? (
@@ -23,29 +33,27 @@ export default function ModalResult({
               <tr>
                 <td>Nomor</td>
                 <td>:</td>
-                <td className="font-bold text-green-600">
-                  PKE-PPPK/2022/98073/1/12986
-                </td>
+                <td className="font-bold text-green-600">{searchResult?.id}</td>
               </tr>
               <tr>
                 <td>Nama</td>
                 <td>:</td>
-                <td>Bima Jatmiko Abadi</td>
+                <td>{searchResult?.name}</td>
               </tr>
               <tr>
                 <td>Webinar</td>
                 <td>:</td>
-                <td>Digital Transaction vs Audit</td>
+                <td>{searchResult?.title}</td>
               </tr>
               <tr>
                 <td>Durasi</td>
                 <td>:</td>
-                <td>120 menit</td>
+                <td>{searchResult?.duration}</td>
               </tr>
               <tr>
                 <td>Kegiatan</td>
                 <td>:</td>
-                <td>Profesi Keuangan Expo 2022</td>
+                <td>{searchResult?.event}</td>
               </tr>
             </tbody>
           </table>
@@ -53,8 +61,8 @@ export default function ModalResult({
       ) : (
         <>
           <Alert type="secondary">Sertifikat tidak terdaftar</Alert>
-          Nomor PKE-PPPK/2022/98073/1/12986 tidak terdaftar di Profesi Keuangan
-          Expo.
+          Nomor register {searchResult?.id} tidak terdaftar sertifikat di
+          Profesi Keuangan Expo.
         </>
       )}
     </Modal>
