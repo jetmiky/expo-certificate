@@ -1,8 +1,13 @@
+import { ChangeEventHandler } from "react";
+
 interface Props {
   id: string;
   label: string;
+  name: string;
   type?: string;
-  name?: string;
+  value?: any;
+  onChange?: ChangeEventHandler;
+  required?: boolean;
 }
 
 export default function Input({
@@ -10,6 +15,9 @@ export default function Input({
   label,
   id,
   name,
+  required = false,
+  value = "",
+  onChange,
 }: Props): JSX.Element {
   return (
     <div className="relative">
@@ -19,6 +27,9 @@ export default function Input({
         type={type}
         placeholder={label}
         className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-indigo-500"
+        value={value}
+        required={required}
+        onChange={onChange}
       />
       <label
         htmlFor={id}

@@ -1,4 +1,4 @@
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 
 // Configs
 import initializeIcon from "./config/icons";
@@ -21,12 +21,18 @@ import logo from "./assets/logo.png";
 initializeIcon();
 
 function App() {
+  const [certificateCode, setCertificateCode] = useState("");
+
   const [showModal, setShowModal] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
   const [searchResult, setSearchResult] = useState({});
 
-  const handleSearch = async (e: FormEvent) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setCertificateCode(e.target.value);
+  };
+
+  const handleSearch = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
 
@@ -71,7 +77,14 @@ function App() {
             onSubmit={handleSearch}
           >
             <div className="pt-8 pb-5">
-              <Input id="certificate-code" label="Nomor Sertifikat" />
+              <Input
+                name="certificate-code"
+                id="certificate-code"
+                label="Nomor Sertifikat"
+                value={certificateCode}
+                onChange={handleInputChange}
+                required={true}
+              />
             </div>
 
             <div className="flex-center">
