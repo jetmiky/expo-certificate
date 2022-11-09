@@ -10,8 +10,10 @@ initializeIcon();
 
 function App() {
   return (
-    <main className="min-h-screen w-full flex-center flex-col">
-      <div className="container">
+    <div className="min-h-screen w-full flex items-center justify-between flex-col">
+      <header></header>
+
+      <main className="container">
         <h1 className="text-center mb-1">Cek Sertifikat</h1>
         <p className="text-center text-gray-400 px-10">
           Cek keaslian sertifikat webinar Profesi Keuangan Expo
@@ -31,8 +33,10 @@ function App() {
             </div>
           </form>
         </div>
-      </div>
-    </main>
+      </main>
+
+      <footer></footer>
+    </div>
   );
 }
 
