@@ -5,10 +5,12 @@ import initializeIcon from "./config/icons";
 import social from "./config/social";
 
 // Components
-import Modal from "./components/Modal";
 import Input from "./components/Input";
 import Button from "./components/Button";
 import SocialLink from "./components/SocialLink";
+
+// Templates
+import ModalResult from "./components/templates/ModalResult";
 
 // Assets
 import logo from "./assets/logo.png";
@@ -73,11 +75,7 @@ function App() {
         </div>
       </footer>
 
-      {showModal && (
-        <Modal onToggle={setShowModal} title="Cek Sertifikat">
-          Modal content should goes here.
-        </Modal>
-      )}
+      {showModal && <ModalResult onToggle={setShowModal} isSuccess={true} />}
     </div>
   );
 }
