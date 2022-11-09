@@ -41,8 +41,10 @@ function App() {
         throw Error("Server error.");
       }
 
+      const searchResult = await response.json();
+
+      setSearchResult(searchResult);
       setShowModal(true);
-      setSearchResult(response.json());
     } catch (error) {
       console.log(error);
       alert("We are sorry, unexpected error happened.");
