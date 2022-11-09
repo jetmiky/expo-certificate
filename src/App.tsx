@@ -1,6 +1,12 @@
+// Configs
+import initializeIcon from "./config/icons";
+
 // Components
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import Input from "./components/Input";
 import Button from "./components/Button";
+
+initializeIcon();
 
 function App() {
   return (
