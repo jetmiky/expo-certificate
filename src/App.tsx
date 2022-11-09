@@ -4,6 +4,9 @@ import { useState, FormEvent } from "react";
 import initializeIcon from "./config/icons";
 import social from "./config/social";
 
+// APIs
+import { search } from "./api/search";
+
 // Components
 import Input from "./components/Input";
 import Button from "./components/Button";
@@ -19,10 +22,14 @@ initializeIcon();
 
 function App() {
   const [showModal, setShowModal] = useState(false);
-  const handleSearch = (e: FormEvent) => {
+
+  const handleSearch = async (e: FormEvent) => {
     e.preventDefault();
 
-    setShowModal(true);
+    try {
+      const result = await search();
+      setShowModal(true);
+    } catch {}
   };
 
   return (
