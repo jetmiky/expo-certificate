@@ -1,6 +1,7 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 
 // APIs
+import { AxiosError } from "axios";
 import { search } from "../api/search";
 
 // Layouts
@@ -31,19 +32,18 @@ export default function Home(): JSX.Element {
     setIsLoading(true);
 
     try {
-      const response = await search(200);
-      if (response.status !== 200 && response.status !== 404) {
-        throw Error("Server error.");
+      const response = await search(certificateCode);
+      const certificate = response.data.certificate;
+
+      setSearchResult(certificate);
+    } catch (error: AxiosError | any) {
+      if (error.response && error.response.status === 404) {
+        setSearchResult({});
+      } else {
+        alert("We are sorry, unexpected error happened.");
       }
-
-      const searchResult = await response.json();
-
-      setSearchResult(searchResult);
-      setShowModal(true);
-    } catch (error) {
-      console.log(error);
-      alert("We are sorry, unexpected error happened.");
     } finally {
+      setShowModal(true);
       setIsLoading(false);
     }
   };
