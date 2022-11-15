@@ -6,4 +6,9 @@ const baseURL =
     : "http://localhost:5001/expo-certificate/us-central1/api";
 
 const api = axios.create({ baseURL });
+
+export const setAuthorization = (token: string) => {
+  api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+};
+
 export default api;
