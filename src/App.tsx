@@ -8,6 +8,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./routes/Home";
 import Admin from "./routes/Admin";
 import AdminLogin from "./routes/Admin/Login";
+import AdminDashboard from "./routes/Admin/Dashboard";
 
 initializeIcon();
 
@@ -16,6 +17,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/admin" element={<Admin />}>
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/login" element={<AdminLogin />} />
       </Route>
       <Route path="*" element={<Navigate to="/" />} />
