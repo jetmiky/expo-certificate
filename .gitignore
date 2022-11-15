@@ -27,3 +27,6 @@ dist-ssr
 .firebase
 functions
 .firebaserc
+
+# Evironment Variables
+.env
