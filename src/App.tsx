@@ -32,7 +32,10 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route
+          path="/admin/login"
+          element={<AdminLogin setIsAuthenticated={setIsAuthenticated} />}
+        />
       </Route>
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
