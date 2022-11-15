@@ -25,6 +25,10 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/admin" element={<Admin />}>
         <Route
+          index
+          element={<AdminLogin setIsAuthenticated={setIsAuthenticated} />}
+        />
+        <Route
           path="/admin/dashboard"
           element={
             <PrivateRoute isAuthenticated={isAuthenticated}>
