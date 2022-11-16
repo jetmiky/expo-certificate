@@ -56,7 +56,7 @@ export default function ModalSearch(props: Props): JSX.Element {
 
     try {
       if (instanceOfCertificate(certificate)) {
-        await deleteCertificate(certificate.id || "");
+        await deleteCertificate(certificate.id);
         alert("Delete certificate success!");
 
         setCertificate({});
