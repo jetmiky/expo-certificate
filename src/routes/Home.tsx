@@ -15,13 +15,16 @@ import Button from "../components/Button";
 // Templates
 import ModalResult from "../components/templates/ModalResult";
 
+// Types
+import Certificate from "../types/Certificate";
+
 export default function Home(): JSX.Element {
   const [certificateCode, setCertificateCode] = useState("");
 
   const [showModal, setShowModal] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [searchResult, setSearchResult] = useState({});
+  const [searchResult, setSearchResult] = useState<Certificate>({});
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCertificateCode(e.target.value);
@@ -33,7 +36,7 @@ export default function Home(): JSX.Element {
 
     try {
       const response = await search(certificateCode);
-      const certificate = response.data.certificate;
+      const { certificate } = response.data;
 
       setSearchResult(certificate);
     } catch (error: AxiosError | any) {

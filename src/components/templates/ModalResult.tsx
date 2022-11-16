@@ -2,17 +2,12 @@
 import Modal from "../Modal";
 import Alert from "../Alert";
 
+// Types
+import Certificate from "../../types/Certificate";
+
 interface Props {
   onToggle: Function;
-  searchResult: Result;
-}
-
-interface Result {
-  id?: string;
-  name?: string;
-  title?: string;
-  duration?: string;
-  event?: string;
+  searchResult: Certificate;
 }
 
 export default function ModalResult({
@@ -33,27 +28,27 @@ export default function ModalResult({
               <tr>
                 <td>Nomor</td>
                 <td>:</td>
-                <td className="font-bold text-green-600">{searchResult?.id}</td>
+                <td className="font-bold text-green-600">{searchResult.id}</td>
               </tr>
               <tr>
                 <td>Nama</td>
                 <td>:</td>
-                <td>{searchResult?.name}</td>
+                <td>{searchResult.name}</td>
               </tr>
               <tr>
                 <td>Webinar</td>
                 <td>:</td>
-                <td>{searchResult?.title}</td>
+                <td>{searchResult.title}</td>
               </tr>
               <tr>
                 <td>Durasi</td>
                 <td>:</td>
-                <td>{searchResult?.duration}</td>
+                <td>{searchResult.duration}</td>
               </tr>
               <tr>
                 <td>Kegiatan</td>
                 <td>:</td>
-                <td>{searchResult?.event}</td>
+                <td>{searchResult.event}</td>
               </tr>
             </tbody>
           </table>
@@ -61,8 +56,8 @@ export default function ModalResult({
       ) : (
         <>
           <Alert type="secondary">Sertifikat tidak terdaftar</Alert>
-          Nomor register {searchResult?.id} tidak terdaftar sertifikat di
-          Profesi Keuangan Expo.
+          Nomor register {searchResult.id} tidak terdaftar sertifikat di Profesi
+          Keuangan Expo.
         </>
       )}
     </Modal>

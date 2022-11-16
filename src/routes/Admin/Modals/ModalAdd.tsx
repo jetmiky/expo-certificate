@@ -7,26 +7,16 @@ import { addCertificate } from "../../../api/certificate";
 import Modal from "../../../components/Modal";
 import Input from "../../../components/Input";
 
+// Types
+import Certificate from "../../../types/Certificate";
+
 interface Props {
-  certificate: any;
+  certificate: Certificate;
   onToggle: Function;
 }
 
 export default function ModalAdd(props: Props): JSX.Element {
   const { onToggle, certificate } = props;
-
-  // Init certificate if provided
-  useEffect(() => {
-    if (!!certificate.id) {
-      setId(certificate.id);
-      setTitle(certificate.title);
-      setEvent(certificate.event);
-      setName(certificate.name);
-      setDuration(certificate.duration);
-
-      setIsEditMode(true);
-    }
-  }, [certificate]);
 
   const [isEditMode, setIsEditMode] = useState(false);
   const [id, setId] = useState("");
@@ -34,6 +24,18 @@ export default function ModalAdd(props: Props): JSX.Element {
   const [event, setEvent] = useState("");
   const [name, setName] = useState("");
   const [duration, setDuration] = useState("");
+
+  // Init certificate if provided
+  useEffect(() => {
+    if (!!certificate.id) {
+      setId(certificate.id);
+      setIsEditMode(true);
+    }
+    if (!!certificate.title) setTitle(certificate.title);
+    if (!!certificate.event) setEvent(certificate.event);
+    if (!!certificate.name) setName(certificate.name);
+    if (!!certificate.duration) setDuration(certificate.duration);
+  }, [certificate]);
 
   const handleInputChange =
     (name: "id" | "title" | "event" | "name" | "duration") =>
@@ -50,7 +52,7 @@ export default function ModalAdd(props: Props): JSX.Element {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const certificate = { id, title, event, name, duration };
+    const certificate: Certificate = { id, title, event, name, duration };
 
     try {
       await addCertificate(certificate);

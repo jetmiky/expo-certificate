@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+// Types
+import Certificate from "../../types/Certificate";
+
 // Components
 import Button from "../../components/Button";
 import ModalAdd from "./Modals/ModalAdd";
@@ -7,7 +10,7 @@ import ModalBatchAdd from "./Modals/ModalBatchAdd";
 import ModalSearch from "./Modals/ModalSearch";
 
 export default function AdminDashboard(): JSX.Element {
-  const [certificate, setCertificate] = useState({});
+  const [certificate, setCertificate] = useState<Certificate>({});
 
   const [isModalAddShown, setIsModalAddShown] = useState(false);
   const [isModalBatchAddShown, setIsModalBatchAddShown] = useState(false);
@@ -20,7 +23,7 @@ export default function AdminDashboard(): JSX.Element {
     if (modal === "search") return setIsModalSearchShown(!isModalSearchShown);
   };
 
-  const handleEditCertificate = (certificate) => {
+  const handleEditCertificate = (certificate: Certificate) => {
     setCertificate(certificate);
 
     setIsModalSearchShown(false);

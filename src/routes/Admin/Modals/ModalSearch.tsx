@@ -1,5 +1,8 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 
+// Types
+import Certificate from "../../../types/Certificate";
+
 // APIs
 import { AxiosError } from "axios";
 import { search, deleteCertificate } from "../../../api/certificate";
