@@ -11,10 +11,11 @@ import Button from "../../../components/Button";
 
 interface Props {
   onToggle: Function;
+  onEditCertificate: Function;
 }
 
 export default function ModalSearch(props: Props): JSX.Element {
-  const { onToggle } = props;
+  const { onToggle, onEditCertificate } = props;
 
   const [id, setId] = useState("");
   const [certificate, setCertificate] = useState<any>({});
@@ -40,6 +41,10 @@ export default function ModalSearch(props: Props): JSX.Element {
 
       alert("Unexptected error occured.");
     }
+  };
+
+  const handleEdit = () => {
+    onEditCertificate(certificate);
   };
 
   const handleDelete = async () => {
@@ -76,7 +81,7 @@ export default function ModalSearch(props: Props): JSX.Element {
 
       {!!certificate?.name && (
         <>
-          <Button>Edit</Button>
+          <Button onClick={handleEdit}>Edit</Button>
           <Button onClick={handleDelete} isLoading={isDeleteLoading}>
             Delete
           </Button>

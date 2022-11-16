@@ -1,4 +1,4 @@
-import { useState, FormEvent, ChangeEvent } from "react";
+import { useState, useEffect, FormEvent, ChangeEvent } from "react";
 
 // APIs
 import { addCertificate } from "../../../api/certificate";
@@ -8,12 +8,27 @@ import Modal from "../../../components/Modal";
 import Input from "../../../components/Input";
 
 interface Props {
+  certificate: any;
   onToggle: Function;
 }
 
 export default function ModalAdd(props: Props): JSX.Element {
-  const { onToggle } = props;
+  const { onToggle, certificate } = props;
 
+  // Init certificate if provided
+  useEffect(() => {
+    if (!!certificate.id) {
+      setId(certificate.id);
+      setTitle(certificate.title);
+      setEvent(certificate.event);
+      setName(certificate.name);
+      setDuration(certificate.duration);
+
+      setIsEditMode(true);
+    }
+  }, [certificate]);
+
+  const [isEditMode, setIsEditMode] = useState(false);
   const [id, setId] = useState("");
   const [title, setTitle] = useState("");
   const [event, setEvent] = useState("");
@@ -48,7 +63,10 @@ export default function ModalAdd(props: Props): JSX.Element {
   };
 
   return (
-    <Modal title="Add Certificate" onToggle={onToggle}>
+    <Modal
+      title={isEditMode ? "Edit Certificate" : "Add Certificate"}
+      onToggle={onToggle}
+    >
       <form onSubmit={handleSubmit} autoComplete="off">
         <Input
           id="id"

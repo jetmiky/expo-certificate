@@ -7,6 +7,8 @@ import ModalBatchAdd from "./Modals/ModalBatchAdd";
 import ModalSearch from "./Modals/ModalSearch";
 
 export default function AdminDashboard(): JSX.Element {
+  const [certificate, setCertificate] = useState({});
+
   const [isModalAddShown, setIsModalAddShown] = useState(false);
   const [isModalBatchAddShown, setIsModalBatchAddShown] = useState(false);
   const [isModalSearchShown, setIsModalSearchShown] = useState(false);
@@ -16,6 +18,13 @@ export default function AdminDashboard(): JSX.Element {
     if (modal === "batch")
       return setIsModalBatchAddShown(!isModalBatchAddShown);
     if (modal === "search") return setIsModalSearchShown(!isModalSearchShown);
+  };
+
+  const handleEditCertificate = (certificate) => {
+    setCertificate(certificate);
+
+    setIsModalSearchShown(false);
+    setIsModalAddShown(true);
   };
 
   return (
@@ -29,12 +38,20 @@ export default function AdminDashboard(): JSX.Element {
       </Button>
       <Button onClick={handleToggleModal("search")}>Search certificate</Button>
 
-      {isModalAddShown && <ModalAdd onToggle={handleToggleModal("add")} />}
+      {isModalAddShown && (
+        <ModalAdd
+          certificate={certificate}
+          onToggle={handleToggleModal("add")}
+        />
+      )}
       {isModalBatchAddShown && (
         <ModalBatchAdd onToggle={handleToggleModal("batch")} />
       )}
       {isModalSearchShown && (
-        <ModalSearch onToggle={handleToggleModal("search")} />
+        <ModalSearch
+          onToggle={handleToggleModal("search")}
+          onEditCertificate={handleEditCertificate}
+        />
       )}
     </section>
   );
