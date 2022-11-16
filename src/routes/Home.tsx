@@ -24,7 +24,7 @@ export default function Home(): JSX.Element {
   const [showModal, setShowModal] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [searchResult, setSearchResult] = useState<Certificate>({});
+  const [searchResult, setSearchResult] = useState<Certificate | {}>({});
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCertificateCode(e.target.value);

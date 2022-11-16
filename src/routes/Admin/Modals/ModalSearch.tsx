@@ -1,7 +1,7 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 
 // Types
-import Certificate from "../../../types/Certificate";
+import Certificate, { instanceOfCertificate } from "../../../types/Certificate";
 
 // APIs
 import { AxiosError } from "axios";
@@ -21,7 +21,7 @@ export default function ModalSearch(props: Props): JSX.Element {
   const { onToggle, onEditCertificate } = props;
 
   const [id, setId] = useState("");
-  const [certificate, setCertificate] = useState<any>({});
+  const [certificate, setCertificate] = useState<Certificate | {}>({});
 
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
@@ -39,6 +39,7 @@ export default function ModalSearch(props: Props): JSX.Element {
       setCertificate(certificate);
     } catch (error: AxiosError | any) {
       if (error.response && error.response.status === 404) {
+        setCertificate({});
         return alert("Certificate not found.");
       }
 
@@ -54,11 +55,15 @@ export default function ModalSearch(props: Props): JSX.Element {
     setIsDeleteLoading(true);
 
     try {
-      await deleteCertificate(certificate.id);
-      alert("Delete certificate success!");
+      if (instanceOfCertificate(certificate)) {
+        await deleteCertificate(certificate.id || "");
+        alert("Delete certificate success!");
 
-      setCertificate({});
-      setId("");
+        setCertificate({});
+        setId("");
+      } else {
+        throw new Error("Certificate is not searched yet.");
+      }
     } catch (error) {
       console.log(error);
       alert("Unknown error occured.");
@@ -82,7 +87,7 @@ export default function ModalSearch(props: Props): JSX.Element {
         <button className="hidden">Submit</button>
       </form>
 
-      {!!certificate?.name && (
+      {instanceOfCertificate(certificate) && (
         <>
           <Button onClick={handleEdit}>Edit</Button>
           <Button onClick={handleDelete} isLoading={isDeleteLoading}>

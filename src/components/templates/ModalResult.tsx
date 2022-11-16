@@ -3,18 +3,18 @@ import Modal from "../Modal";
 import Alert from "../Alert";
 
 // Types
-import Certificate from "../../types/Certificate";
+import Certificate, { instanceOfCertificate } from "../../types/Certificate";
 
 interface Props {
   onToggle: Function;
-  searchResult: Certificate;
+  searchResult: Certificate | {};
 }
 
 export default function ModalResult({
   onToggle,
   searchResult,
 }: Props): JSX.Element {
-  const isSuccess = !!searchResult.name;
+  const isSuccess = instanceOfCertificate(searchResult);
 
   return (
     <Modal onToggle={onToggle} title="Cek Sertifikat">
@@ -56,8 +56,7 @@ export default function ModalResult({
       ) : (
         <>
           <Alert type="secondary">Sertifikat tidak terdaftar</Alert>
-          Nomor register {searchResult.id} tidak terdaftar sertifikat di Profesi
-          Keuangan Expo.
+          Nomor sertifikat tidak terdaftar di Profesi Keuangan Expo.
         </>
       )}
     </Modal>

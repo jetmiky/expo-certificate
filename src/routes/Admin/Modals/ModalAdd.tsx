@@ -8,10 +8,10 @@ import Modal from "../../../components/Modal";
 import Input from "../../../components/Input";
 
 // Types
-import Certificate from "../../../types/Certificate";
+import Certificate, { instanceOfCertificate } from "../../../types/Certificate";
 
 interface Props {
-  certificate: Certificate;
+  certificate: Certificate | {};
   onToggle: Function;
 }
 
@@ -27,14 +27,15 @@ export default function ModalAdd(props: Props): JSX.Element {
 
   // Init certificate if provided
   useEffect(() => {
-    if (!!certificate.id) {
+    if (instanceOfCertificate(certificate)) {
       setId(certificate.id);
+      setTitle(certificate.title);
+      setEvent(certificate.event);
+      setName(certificate.name);
+      setDuration(certificate.duration);
+
       setIsEditMode(true);
     }
-    if (!!certificate.title) setTitle(certificate.title);
-    if (!!certificate.event) setEvent(certificate.event);
-    if (!!certificate.name) setName(certificate.name);
-    if (!!certificate.duration) setDuration(certificate.duration);
   }, [certificate]);
 
   const handleInputChange =

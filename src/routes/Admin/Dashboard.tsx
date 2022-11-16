@@ -10,7 +10,7 @@ import ModalBatchAdd from "./Modals/ModalBatchAdd";
 import ModalSearch from "./Modals/ModalSearch";
 
 export default function AdminDashboard(): JSX.Element {
-  const [certificate, setCertificate] = useState<Certificate>({});
+  const [certificate, setCertificate] = useState<Certificate | {}>({});
 
   const [isModalAddShown, setIsModalAddShown] = useState(false);
   const [isModalBatchAddShown, setIsModalBatchAddShown] = useState(false);
