@@ -8,7 +8,18 @@ const baseURL =
 const api = axios.create({ baseURL });
 
 export const setAuthorization = (token: string) => {
-  api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  const authToken = `Bearer ${token}`;
+
+  window.localStorage.setItem("Authorization", token);
+  api.defaults.headers.common["Authorization"] = authToken;
+};
+
+export const checkIsAuthorized = () => {
+  // TODO: Add method to check token validity
+  const token = window.localStorage.getItem("Authorization");
+  if (!!token) setAuthorization(token);
+
+  return !!token;
 };
 
 export default api;

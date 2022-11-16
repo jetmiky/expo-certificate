@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Configs
 import initializeIcon from "./config/icons";
+
+// APIs
+import { checkIsAuthorized } from "./config/api";
 
 // Router
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -18,7 +21,12 @@ import PrivateRoute from "./components/PrivateRoute";
 initializeIcon();
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const isAuthorized = checkIsAuthorized();
+    setIsAuthenticated(isAuthorized);
+  }, []);
 
   return (
     <Routes>
