@@ -2,6 +2,9 @@ import { useState } from "react";
 
 // Components
 import Button from "../../components/Button";
+import ModalAdd from "./Modals/ModalAdd";
+import ModalBatchAdd from "./Modals/ModalBatchAdd";
+import ModalSearch from "./Modals/ModalSearch";
 
 export default function AdminDashboard(): JSX.Element {
   const [isModalAddShown, setIsModalAddShown] = useState(false);
@@ -25,6 +28,14 @@ export default function AdminDashboard(): JSX.Element {
         Batch add certificate
       </Button>
       <Button onClick={handleToggleModal("search")}>Search certificate</Button>
+
+      {isModalAddShown && <ModalAdd onToggle={handleToggleModal("add")} />}
+      {isModalBatchAddShown && (
+        <ModalBatchAdd onToggle={handleToggleModal("batch")} />
+      )}
+      {isModalSearchShown && (
+        <ModalSearch onToggle={handleToggleModal("search")} />
+      )}
     </section>
   );
 }
