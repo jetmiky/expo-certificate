@@ -7,6 +7,7 @@ import { search } from "../../../api/certificate";
 // Components
 import Modal from "../../../components/Modal";
 import Input from "../../../components/Input";
+import Button from "../../../components/Button";
 
 interface Props {
   onToggle: Function;
@@ -16,6 +17,8 @@ export default function ModalSearch(props: Props): JSX.Element {
   const { onToggle } = props;
 
   const [id, setId] = useState("");
+  const [certificate, setCertificate] = useState<any>({});
+
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setId(e.target.value);
   };
@@ -27,7 +30,7 @@ export default function ModalSearch(props: Props): JSX.Element {
       const response = await search(id);
       const certificate = response.data.certificate;
 
-      console.log(certificate);
+      setCertificate(certificate);
     } catch (error: AxiosError | any) {
       if (error.response && error.response.status === 404) {
         return alert("Certificate not found.");
@@ -51,6 +54,13 @@ export default function ModalSearch(props: Props): JSX.Element {
 
         <button className="hidden">Submit</button>
       </form>
+
+      {!!certificate?.name && (
+        <>
+          <Button>Edit</Button>
+          <Button>Delete</Button>
+        </>
+      )}
     </Modal>
   );
 }
