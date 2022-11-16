@@ -1,5 +1,8 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 
+// APIs
+import { addCertificate } from "../../../api/certificate";
+
 // Components
 import Modal from "../../../components/Modal";
 import Input from "../../../components/Input";
@@ -29,11 +32,19 @@ export default function ModalAdd(props: Props): JSX.Element {
       if (name === "duration") return setDuration(value);
     };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const certificate = { id, title, event, name, duration };
-    console.log(certificate);
+
+    try {
+      await addCertificate(certificate);
+
+      alert("Add certificate success!");
+      onToggle();
+    } catch (error) {
+      alert("Unexpected error occured");
+    }
   };
 
   return (
