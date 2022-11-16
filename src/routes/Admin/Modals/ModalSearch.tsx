@@ -2,7 +2,7 @@ import { useState, FormEvent, ChangeEvent } from "react";
 
 // APIs
 import { AxiosError } from "axios";
-import { search } from "../../../api/certificate";
+import { search, deleteCertificate } from "../../../api/certificate";
 
 // Components
 import Modal from "../../../components/Modal";
@@ -18,6 +18,8 @@ export default function ModalSearch(props: Props): JSX.Element {
 
   const [id, setId] = useState("");
   const [certificate, setCertificate] = useState<any>({});
+
+  const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setId(e.target.value);
@@ -40,6 +42,23 @@ export default function ModalSearch(props: Props): JSX.Element {
     }
   };
 
+  const handleDelete = async () => {
+    setIsDeleteLoading(true);
+
+    try {
+      await deleteCertificate(certificate.id);
+      alert("Delete certificate success!");
+
+      setCertificate({});
+      setId("");
+    } catch (error) {
+      console.log(error);
+      alert("Unknown error occured.");
+    } finally {
+      setIsDeleteLoading(false);
+    }
+  };
+
   return (
     <Modal title="Search Certificate" onToggle={onToggle}>
       <form onSubmit={handleSubmit} autoComplete="off">
@@ -58,7 +77,9 @@ export default function ModalSearch(props: Props): JSX.Element {
       {!!certificate?.name && (
         <>
           <Button>Edit</Button>
-          <Button>Delete</Button>
+          <Button onClick={handleDelete} isLoading={isDeleteLoading}>
+            Delete
+          </Button>
         </>
       )}
     </Modal>

@@ -12,3 +12,8 @@ export function search(id: string) {
   const encodedCode = encodeId(id);
   return api.get(`/certificates/${encodedCode}`);
 }
+
+export async function deleteCertificate(id: string) {
+  const encodedCode = encodeId(id);
+  return api.delete(`/certificates/${encodedCode}`);
+}
