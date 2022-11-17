@@ -20,7 +20,27 @@ export default function ModalResult({
     <Modal onToggle={onToggle} title="Cek Sertifikat">
       {isSuccess ? (
         <>
-          <Alert type="primary">Sertifikat terdaftar</Alert>
+          <Alert type="primary">
+            <svg
+              className="checkmark inline w-8 h-8 mr-3"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 52 52"
+            >
+              <circle
+                className="checkmark__circle"
+                cx="26"
+                cy="26"
+                r="25"
+                fill="none"
+              />
+              <path
+                className="checkmark__check"
+                fill="none"
+                d="M14.1 27.2l7.1 7.2 16.7-16.8"
+              />
+            </svg>
+            Sertifikat terdaftar
+          </Alert>
           <p className="mt-2">
             <strong>Sertifikat terdaftar</strong> di Profesi Keuangan Expo,
             dengan data sebagai berikut.

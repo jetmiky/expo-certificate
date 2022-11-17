@@ -18,7 +18,7 @@ export default function Alert({
       : "";
 
   return (
-    <div className={`${classes} flex rounded-lg p-4 text-sm`}>
+    <div className={`${classes} flex rounded-lg px-4 py-3 text-sm`}>
       <div>{children}</div>
     </div>
   );
