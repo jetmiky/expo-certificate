@@ -78,7 +78,7 @@ export default function ModalAdd(props: Props): JSX.Element {
 
   return (
     <Modal
-      title={isEditMode ? "Edit Certificate" : "Tambah Certificate"}
+      title={isEditMode ? "Ubah Sertifikat" : "Tambah Sertifikat"}
       onToggle={onToggle}
     >
       <form

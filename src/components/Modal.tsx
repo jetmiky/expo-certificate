@@ -42,7 +42,7 @@ export default function Modal({
               {children}
             </div>
             <div className="flex items-center justify-end px-6 py-4 border-t border-solid border-slate-200 rounded-b">
-              <Button onClick={handleCloseModal}>Close</Button>
+              <Button onClick={handleCloseModal}>Tutup</Button>
             </div>
           </div>
         </div>

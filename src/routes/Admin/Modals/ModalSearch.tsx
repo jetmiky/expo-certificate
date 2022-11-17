@@ -43,7 +43,7 @@ export default function ModalSearch(props: Props): JSX.Element {
     } catch (error: AxiosError | any) {
       if (error.response && error.response.status === 404) {
         setCertificate({});
-        return alert("Certificate tidak ditemukan!");
+        return alert("Sertifikat tidak ditemukan!");
       }
 
       alert("Unexpected error occured.");
@@ -62,12 +62,12 @@ export default function ModalSearch(props: Props): JSX.Element {
     try {
       if (instanceOfCertificate(certificate)) {
         await deleteCertificate(certificate.id);
-        alert("Hapus certificate berhasil!");
+        alert("Hapus sertifikat berhasil!");
 
         setCertificate({});
         setId("");
       } else {
-        throw new Error("Certificate is not searched yet.");
+        throw new Error("Isi nomor sertifikat.");
       }
     } catch (error) {
       console.log(error);
@@ -78,7 +78,7 @@ export default function ModalSearch(props: Props): JSX.Element {
   };
 
   return (
-    <Modal title="Search Certificate" onToggle={onToggle}>
+    <Modal title="Cari Sertifikat" onToggle={onToggle}>
       <form onSubmit={handleSubmit} autoComplete="off">
         <div className="mt-2 mb-1 w-80">
           <Input

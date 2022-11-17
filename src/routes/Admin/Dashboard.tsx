@@ -44,21 +44,21 @@ export default function AdminDashboard(): JSX.Element {
   return (
     <main className="container">
       <div className="text-center">
-        <h2 className="text-indigo-800">Hello buddy!</h2>
-        <p>What do you want to do today?</p>
+        <h2 className="text-indigo-800">Halo kawan!</h2>
+        <p>Apa yang mau kamu lakukan hari ini?</p>
       </div>
 
       <section className="my-10 text-center">
         <div className="mb-2">
           <Button onClick={handleToggleModal("add")}>
             <Icon icon="plus" className="mr-3" />
-            Add certificate
+            Tambah sertifikat
           </Button>
         </div>
         <div className="mb-2">
           <Button onClick={handleToggleModal("batch")}>
             <Icon icon="cloud-upload-alt" className="mr-3" />
-            Add certificate (batch)
+            Tambah sertifikat (batch)
           </Button>
         </div>
 
@@ -67,7 +67,7 @@ export default function AdminDashboard(): JSX.Element {
         <div>
           <Button onClick={handleToggleModal("search")} theme="green">
             <Icon icon="search" className="mr-3" />
-            Search certificate
+            Cari sertifikat
           </Button>
         </div>
       </section>
@@ -78,7 +78,7 @@ export default function AdminDashboard(): JSX.Element {
           className="text-sm text-gray-500 underline-offset-8 hover:underline"
           onClick={logout}
         >
-          I'm done. Log me out.
+          Apa kamu sudah selesai? Log out.
         </Link>
       </div>
 

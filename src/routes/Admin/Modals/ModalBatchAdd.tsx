@@ -46,15 +46,15 @@ export default function ModalBatchAdd(props: Props): JSX.Element {
 
         const { rows, errors } = await readXlsx(file, readOptions);
         if (errors.length) {
-          throw new Error("Error found, please re-check Excel file.");
+          throw new Error("Error. Mohon cek kembali file Excel.");
         }
 
         await addCertificate(rows as Certificate[]);
 
-        alert("Add batch certificate success!");
+        alert("Tambah multiple sertifikat berhasil!");
         onToggle();
       } else {
-        throw new Error("File is not selected yet!");
+        throw new Error("Pilih file terlebih dahulu!");
       }
     } catch (error: Error | any) {
       console.log(error);
