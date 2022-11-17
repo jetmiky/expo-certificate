@@ -103,6 +103,7 @@ export default function ModalAdd(props: Props): JSX.Element {
             name="id"
             value={id}
             onChange={handleInputChange("id")}
+            disabled={isEditMode}
             required
           />
         </div>
