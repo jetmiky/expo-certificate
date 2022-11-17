@@ -30,6 +30,10 @@ export default function AdminDashboard(): JSX.Element {
     setIsModalAddShown(true);
   };
 
+  const handleResetCertificate = () => {
+    setCertificate({});
+  };
+
   return (
     <main className="container pb-10">
       <div className="text-center">
@@ -59,6 +63,7 @@ export default function AdminDashboard(): JSX.Element {
       {isModalAddShown && (
         <ModalAdd
           certificate={certificate}
+          onResetCertificate={handleResetCertificate}
           onToggle={handleToggleModal("add")}
         />
       )}
