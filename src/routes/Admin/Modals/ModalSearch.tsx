@@ -23,6 +23,7 @@ export default function ModalSearch(props: Props): JSX.Element {
   const [id, setId] = useState("");
   const [certificate, setCertificate] = useState<Certificate | {}>({});
 
+  const [isSearchLoading, setIsSearchLoading] = useState(false);
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -31,6 +32,7 @@ export default function ModalSearch(props: Props): JSX.Element {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSearchLoading(true);
 
     try {
       const response = await search(id);
@@ -40,10 +42,12 @@ export default function ModalSearch(props: Props): JSX.Element {
     } catch (error: AxiosError | any) {
       if (error.response && error.response.status === 404) {
         setCertificate({});
-        return alert("Certificate not found.");
+        return alert("Certificate tidak ditemukan!");
       }
 
-      alert("Unexptected error occured.");
+      alert("Unexpected error occured.");
+    } finally {
+      setIsSearchLoading(false);
     }
   };
 
@@ -57,7 +61,7 @@ export default function ModalSearch(props: Props): JSX.Element {
     try {
       if (instanceOfCertificate(certificate)) {
         await deleteCertificate(certificate.id);
-        alert("Delete certificate success!");
+        alert("Hapus certificate berhasil!");
 
         setCertificate({});
         setId("");
@@ -75,25 +79,45 @@ export default function ModalSearch(props: Props): JSX.Element {
   return (
     <Modal title="Search Certificate" onToggle={onToggle}>
       <form onSubmit={handleSubmit} autoComplete="off">
-        <Input
-          id="id"
-          label="Nomor Sertifikat"
-          name="id"
-          value={id}
-          onChange={handleInputChange}
-          required
-        />
+        <div className="mt-2 mb-1 w-80">
+          <Input
+            id="id"
+            label="Nomor Sertifikat"
+            name="id"
+            value={id}
+            onChange={handleInputChange}
+            disabled={isSearchLoading}
+            autoFocus
+            required
+          />
+        </div>
+        <p className="text-sm">Tekan "Enter" untuk mencari sertifikat.</p>
 
-        <button className="hidden">Submit</button>
+        <button className="hidden">Cari</button>
       </form>
 
       {instanceOfCertificate(certificate) && (
-        <>
-          <Button onClick={handleEdit}>Edit</Button>
-          <Button onClick={handleDelete} isLoading={isDeleteLoading}>
-            Delete
-          </Button>
-        </>
+        <div className="mt-8">
+          <hr className="mb-4" />
+
+          <p className="text-sm text-center">
+            <strong>Sertifikat berhasil ditemukan!</strong>
+            <br />
+            Pilih salah satu aksi berikut.
+          </p>
+
+          <div className="mt-2 grid grid-cols-2 gap-2">
+            <Button onClick={handleEdit}>Ubah</Button>
+
+            <Button
+              onClick={handleDelete}
+              isLoading={isDeleteLoading}
+              theme="rose"
+            >
+              Hapus
+            </Button>
+          </div>
+        </div>
       )}
     </Modal>
   );
