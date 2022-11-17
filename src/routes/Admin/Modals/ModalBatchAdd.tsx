@@ -10,7 +10,7 @@ import readXlsx, { Schema } from "read-excel-file";
 import Modal from "../../../components/Modal";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 
 // Types
 import Certificate from "../../../types/Certificate";
@@ -66,7 +66,7 @@ export default function ModalBatchAdd(props: Props): JSX.Element {
 
   return (
     <Modal title="Batch Add Certificate" onToggle={onToggle}>
-      <form onSubmit={handleSubmit} className="w-80">
+      <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <Input
             type="file"
@@ -77,15 +77,27 @@ export default function ModalBatchAdd(props: Props): JSX.Element {
             accept="application/vnd.openxmlformats-officedoc'ument.spreadsheetml.sheet"
             required
           />
+          <p className="mt-1 text-sm italic">.XLSX (max 250 row)</p>
         </div>
 
         <div className="text-center">
           <Button isLoading={isSubmitLoading}>
-            <FontAwesomeIcon icon="cloud-upload-alt" className="mr-3" />
+            <Icon icon="cloud-upload-alt" className="mr-3" />
             Upload
           </Button>
         </div>
       </form>
+
+      <hr className="my-5" />
+
+      <div className="text-center">
+        <p className="mb-2">Download template excel contoh berikut.</p>
+
+        <Button theme="green">
+          <Icon icon="file-excel" className="mr-3" />
+          Download Template
+        </Button>
+      </div>
     </Modal>
   );
 }
