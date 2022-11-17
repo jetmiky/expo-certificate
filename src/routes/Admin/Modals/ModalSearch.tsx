@@ -11,6 +11,7 @@ import { search, deleteCertificate } from "../../../api/certificate";
 import Modal from "../../../components/Modal";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 
 interface Props {
   onToggle: Function;
@@ -107,13 +108,17 @@ export default function ModalSearch(props: Props): JSX.Element {
           </p>
 
           <div className="mt-2 grid grid-cols-2 gap-2">
-            <Button onClick={handleEdit}>Ubah</Button>
+            <Button onClick={handleEdit}>
+              <Icon icon="edit" className="mr-3" />
+              Ubah
+            </Button>
 
             <Button
               onClick={handleDelete}
               isLoading={isDeleteLoading}
               theme="rose"
             >
+              <Icon icon="trash-alt" className="mr-3" />
               Hapus
             </Button>
           </div>

@@ -7,6 +7,7 @@ import { addCertificate } from "../../../api/certificate";
 import Modal from "../../../components/Modal";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 
 // Types
 import Certificate, { instanceOfCertificate } from "../../../types/Certificate";
@@ -136,7 +137,10 @@ export default function ModalAdd(props: Props): JSX.Element {
           />
         </div>
 
-        <Button isLoading={isSubmitLoading}>Simpan</Button>
+        <Button isLoading={isSubmitLoading}>
+          <Icon icon="save" className="mr-3" />
+          Simpan
+        </Button>
       </form>
     </Modal>
   );

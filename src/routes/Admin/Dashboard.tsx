@@ -8,6 +8,7 @@ import Button from "../../components/Button";
 import ModalAdd from "./Modals/ModalAdd";
 import ModalBatchAdd from "./Modals/ModalBatchAdd";
 import ModalSearch from "./Modals/ModalSearch";
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 
 export default function AdminDashboard(): JSX.Element {
   const [certificate, setCertificate] = useState<Certificate | {}>({});
@@ -43,10 +44,14 @@ export default function AdminDashboard(): JSX.Element {
 
       <section className="my-10 text-center">
         <div className="mb-2">
-          <Button onClick={handleToggleModal("add")}>Add certificate</Button>
+          <Button onClick={handleToggleModal("add")}>
+            <Icon icon="plus" className="mr-3" />
+            Add certificate
+          </Button>
         </div>
         <div className="mb-2">
           <Button onClick={handleToggleModal("batch")}>
+            <Icon icon="cloud-upload-alt" className="mr-3" />
             Add certificate (batch)
           </Button>
         </div>
@@ -55,6 +60,7 @@ export default function AdminDashboard(): JSX.Element {
 
         <div>
           <Button onClick={handleToggleModal("search")} theme="green">
+            <Icon icon="search" className="mr-3" />
             Search certificate
           </Button>
         </div>

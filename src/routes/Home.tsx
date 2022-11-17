@@ -11,6 +11,7 @@ import Footer from "../components/layout/Footer";
 // Components
 import Input from "../components/Input";
 import Button from "../components/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Templates
 import ModalResult from "../components/templates/ModalResult";
@@ -79,7 +80,10 @@ export default function Home(): JSX.Element {
             </div>
 
             <div className="flex-center">
-              <Button isLoading={isLoading}>Cek Sertifikat</Button>
+              <Button isLoading={isLoading}>
+                <FontAwesomeIcon icon="search" className="mr-3" />
+                Cek Sertifikat
+              </Button>
             </div>
           </form>
         </div>
