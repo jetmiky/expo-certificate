@@ -31,15 +31,30 @@ export default function AdminDashboard(): JSX.Element {
   };
 
   return (
-    <section>
-      <h2>Admin Dashboard here!</h2>
-      <p>What do you want to do?</p>
+    <main className="container pb-10">
+      <div className="text-center">
+        <h2 className="text-indigo-800">Hello buddy!</h2>
+        <p>What do you want to do today?</p>
+      </div>
 
-      <Button onClick={handleToggleModal("add")}>Add certificate</Button>
-      <Button onClick={handleToggleModal("batch")}>
-        Batch add certificate
-      </Button>
-      <Button onClick={handleToggleModal("search")}>Search certificate</Button>
+      <section className="my-10 text-center">
+        <div className="mb-2">
+          <Button onClick={handleToggleModal("add")}>Add certificate</Button>
+        </div>
+        <div className="mb-2">
+          <Button onClick={handleToggleModal("batch")}>
+            Add certificate (batch)
+          </Button>
+        </div>
+
+        <hr className="w-1/3 my-7 mx-auto" />
+
+        <div>
+          <Button onClick={handleToggleModal("search")} theme="green">
+            Search certificate
+          </Button>
+        </div>
+      </section>
 
       {isModalAddShown && (
         <ModalAdd
@@ -56,6 +71,6 @@ export default function AdminDashboard(): JSX.Element {
           onEditCertificate={handleEditCertificate}
         />
       )}
-    </section>
+    </main>
   );
 }
