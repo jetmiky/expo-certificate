@@ -1,5 +1,11 @@
 import { useState } from "react";
 
+// APIs
+import { logout } from "../../api/admin";
+
+// Router
+import { Link } from "react-router-dom";
+
 // Types
 import Certificate from "../../types/Certificate";
 
@@ -36,7 +42,7 @@ export default function AdminDashboard(): JSX.Element {
   };
 
   return (
-    <main className="container pb-10">
+    <main className="container">
       <div className="text-center">
         <h2 className="text-indigo-800">Hello buddy!</h2>
         <p>What do you want to do today?</p>
@@ -65,6 +71,16 @@ export default function AdminDashboard(): JSX.Element {
           </Button>
         </div>
       </section>
+
+      <div className="mt-20 text-center">
+        <Link
+          to="/"
+          className="text-sm text-gray-500 underline-offset-8 hover:underline"
+          onClick={logout}
+        >
+          I'm done. Log me out.
+        </Link>
+      </div>
 
       {isModalAddShown && (
         <ModalAdd

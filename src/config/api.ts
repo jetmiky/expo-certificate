@@ -14,6 +14,10 @@ export const setAuthorization = (token: string) => {
   api.defaults.headers.common["Authorization"] = authToken;
 };
 
+export const removeAuthorization = () => {
+  window.localStorage.removeItem("Authorization");
+};
+
 export const checkIsAuthorized = () => {
   // TODO: Add method to check token validity
   const token = window.localStorage.getItem("Authorization");

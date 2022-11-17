@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import api, { setAuthorization } from "../config/api";
+import api, { setAuthorization, removeAuthorization } from "../config/api";
 
 export const login = async (username: string, password: string) => {
   try {
@@ -14,4 +14,8 @@ export const login = async (username: string, password: string) => {
 
     throw new Error("Unexpected error occured.");
   }
+};
+
+export const logout = () => {
+  removeAuthorization();
 };
