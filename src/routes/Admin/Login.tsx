@@ -52,27 +52,39 @@ export default function AdminLogin(props: Props): JSX.Element {
   };
 
   return (
-    <form autoComplete="off" onSubmit={handleLogin}>
-      <Input
-        id="username"
-        label="Username"
-        name="username"
-        onChange={handleInputChange}
-        value={username}
-        required
-      />
+    <main className="container pb-10">
+      <div className="grid grid-cols-4 gap-2 md:grid-cols-5">
+        <form
+          className="col-start-2 md:col-start-3 flex flex-col"
+          onSubmit={handleLogin}
+          autoComplete="off"
+        >
+          <div className="my-4">
+            <Input
+              id="username"
+              label="Username"
+              name="username"
+              onChange={handleInputChange}
+              value={username}
+              required
+            />
+          </div>
 
-      <Input
-        id="password"
-        label="Password"
-        name="password"
-        onChange={handleInputChange}
-        value={password}
-        type="password"
-        required
-      />
+          <div className="my-4">
+            <Input
+              id="password"
+              label="Password"
+              name="password"
+              onChange={handleInputChange}
+              value={password}
+              type="password"
+              required
+            />
+          </div>
 
-      <Button isLoading={isLoading}>Login</Button>
-    </form>
+          <Button isLoading={isLoading}>Login</Button>
+        </form>
+      </div>
+    </main>
   );
 }
