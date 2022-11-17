@@ -28,6 +28,8 @@ export default function Input(props: Props): JSX.Element {
           className="block w-full text-gray-700 bg-gray-100 border border-solid border-gray-300 rounded-md transition focus:text-gray-700 focus:bg-white focus:border-indigo-600 focus:outline-none cursor-pointer"
           id={id}
           type={type}
+          value={value}
+          onChange={onChange}
         />
       </div>
     );
