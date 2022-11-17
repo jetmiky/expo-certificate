@@ -1,8 +1,11 @@
-import { useState, FormEvent, ChangeEvent } from "react";
+import { useState, useEffect, FormEvent, ChangeEvent } from "react";
 
 // APIs
 import { AxiosError } from "axios";
 import { search } from "../api/certificate";
+
+// Router
+import { useSearchParams } from "react-router-dom";
 
 // Layouts
 import Header from "../components/layout/Header";
@@ -20,12 +23,20 @@ import ModalResult from "./Home/Modals/ModalResult";
 import Certificate from "../types/Certificate";
 
 export default function Home(): JSX.Element {
+  const [searchParams] = useSearchParams();
   const [certificateCode, setCertificateCode] = useState("");
 
   const [showModal, setShowModal] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
   const [searchResult, setSearchResult] = useState<Certificate | {}>({});
+
+  useEffect(() => {
+    if (searchParams.get("code")) {
+      const code = searchParams.get("code") || "";
+      setCertificateCode(code);
+    }
+  }, []);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCertificateCode(e.target.value);
