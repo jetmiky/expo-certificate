@@ -43,6 +43,7 @@ export default function Input(props: Props): JSX.Element {
         className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-indigo-500"
         value={value}
         onChange={onChange}
+        type={type}
         {...rest}
       />
       <label
