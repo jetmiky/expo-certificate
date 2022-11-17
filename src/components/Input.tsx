@@ -16,7 +16,7 @@ interface Props
 }
 
 export default function Input(props: Props): JSX.Element {
-  const { label, id, value = "", onChange, ...rest } = props;
+  const { label, id, value, onChange, ...rest } = props;
 
   return (
     <div className="relative">
