@@ -35,6 +35,7 @@ export default function Button(props: Props): JSX.Element {
     case "rose":
       classes =
         "bg-rose-500 shadow-rose-200 hover:bg-rose-600 focus:bg-rose-600 focus:ring-rose-600 disabled:bg-rose-400/80";
+      break;
     default:
       classes = "";
   }
