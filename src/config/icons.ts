@@ -3,6 +3,7 @@ import { faYoutube, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import {
   faCloudUploadAlt,
   faEdit,
+  faFileExcel,
   faPlus,
   faSave,
   faSearch,
@@ -15,6 +16,7 @@ export default function initializeIcon() {
     faYoutube,
     faCloudUploadAlt,
     faEdit,
+    faFileExcel,
     faPlus,
     faSave,
     faSearch,
