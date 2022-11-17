@@ -16,7 +16,22 @@ interface Props
 }
 
 export default function Input(props: Props): JSX.Element {
-  const { label, id, value, onChange, ...rest } = props;
+  const { type = "text", label, id, value, onChange, ...rest } = props;
+
+  if (type === "file") {
+    return (
+      <div>
+        <label className="block mb-1" htmlFor={id}>
+          {label}
+        </label>
+        <input
+          className="block w-full text-gray-700 bg-gray-100 border border-solid border-gray-300 rounded-md transition focus:text-gray-700 focus:bg-white focus:border-indigo-600 focus:outline-none cursor-pointer"
+          id={id}
+          type={type}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="relative">
