@@ -1,35 +1,32 @@
-import { ChangeEventHandler } from "react";
+import {
+  DetailedHTMLProps,
+  InputHTMLAttributes,
+  FormEventHandler,
+} from "react";
 
-interface Props {
+interface Props
+  extends DetailedHTMLProps<
+    InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  > {
   id: string;
   label: string;
   name: string;
-  type?: string;
-  value?: any;
-  onChange?: ChangeEventHandler;
-  required?: boolean;
+  onChange?: FormEventHandler;
 }
 
-export default function Input({
-  type = "text",
-  label,
-  id,
-  name,
-  required = false,
-  value = "",
-  onChange,
-}: Props): JSX.Element {
+export default function Input(props: Props): JSX.Element {
+  const { label, id, value = "", onChange, ...rest } = props;
+
   return (
     <div className="relative">
       <input
         id={id}
-        name={name}
-        type={type}
         placeholder={label}
         className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-indigo-500"
         value={value}
-        required={required}
         onChange={onChange}
+        {...rest}
       />
       <label
         htmlFor={id}
