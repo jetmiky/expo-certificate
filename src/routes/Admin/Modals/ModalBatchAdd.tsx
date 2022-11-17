@@ -64,6 +64,10 @@ export default function ModalBatchAdd(props: Props): JSX.Element {
     }
   };
 
+  const handleDownloadTemplate = () => {
+    return window.open("/template-batch-upload.xlsx", "_blank");
+  };
+
   return (
     <Modal title="Batch Add Certificate" onToggle={onToggle}>
       <form onSubmit={handleSubmit}>
@@ -93,7 +97,7 @@ export default function ModalBatchAdd(props: Props): JSX.Element {
       <div className="text-center">
         <p className="mb-2">Download template excel contoh berikut.</p>
 
-        <Button theme="green">
+        <Button theme="green" onClick={handleDownloadTemplate}>
           <Icon icon="file-excel" className="mr-3" />
           Download Template
         </Button>
