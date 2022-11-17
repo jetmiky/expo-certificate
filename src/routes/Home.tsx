@@ -2,7 +2,7 @@ import { useState, FormEvent, ChangeEvent } from "react";
 
 // APIs
 import { AxiosError } from "axios";
-import { search } from "../api/search";
+import { search } from "../api/certificate";
 
 // Layouts
 import Header from "../components/layout/Header";
@@ -14,7 +14,7 @@ import Button from "../components/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Templates
-import ModalResult from "../components/templates/ModalResult";
+import ModalResult from "./Home/Modals/ModalResult";
 
 // Types
 import Certificate from "../types/Certificate";

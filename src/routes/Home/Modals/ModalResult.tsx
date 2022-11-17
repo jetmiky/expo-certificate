@@ -1,9 +1,9 @@
 // Components
-import Modal from "../Modal";
-import Alert from "../Alert";
+import Modal from "../../../components/Modal";
+import Alert from "../../../components/Alert";
 
 // Types
-import Certificate, { instanceOfCertificate } from "../../types/Certificate";
+import Certificate, { instanceOfCertificate } from "../../../types/Certificate";
 
 interface Props {
   onToggle: Function;
