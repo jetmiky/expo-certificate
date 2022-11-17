@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 
 // Read Excel
-import readXlsx from "read-excel-file";
+import readXlsx, { Schema } from "read-excel-file";
 
 // Components
 import Modal from "../../../components/Modal";
@@ -24,7 +24,30 @@ export default function ModalBatchAdd(props: Props): JSX.Element {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log("Submitted", file);
+    try {
+      if (!!file) {
+        const schema: Schema = {
+          KEGIATAN: { prop: "event", type: String, required: true },
+          "NOMOR SERTIFIKAT": { prop: "id", type: String, required: true },
+          "JUDUL WEBINAR": { prop: "title", type: String, required: true },
+          "DURASI WEBINAR": { prop: "duration", type: String, required: true },
+          "NAMA PESERTA": { prop: "name", type: String, required: true },
+        };
+        const readOptions = { sheet: 1, schema };
+
+        const { rows, errors } = await readXlsx(file, readOptions);
+        if (errors.length) {
+          throw new Error("Error found, please re-check Excel file.");
+        }
+
+        console.log(rows);
+      } else {
+        throw new Error("File is not selected yet!");
+      }
+    } catch (error: Error | any) {
+      console.log(error);
+      alert(error.message ? error.message : "Unexpected error");
+    }
   };
 
   return (
