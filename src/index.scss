@@ -33,37 +33,59 @@
   @apply flex items-center justify-center;
 }
 
-// Checkmark animation
-.checkmark__circle {
+.mark__circle {
   stroke-dasharray: 166;
   stroke-dashoffset: 166;
   stroke-width: 2;
   stroke-miterlimit: 10;
-  stroke: theme("colors.indigo.600");
   fill: none;
-  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+  animation: mark-stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
 }
-.checkmark {
+
+.mark__circle.check {
+  stroke: theme("colors.indigo.600");
+}
+
+.mark__circle.cross {
+  stroke: theme("colors.rose.600");
+}
+
+.mark {
   border-radius: 50%;
   stroke-width: 2;
-  stroke: #fff;
   stroke-miterlimit: 10;
-  box-shadow: inset 0px 0px 0px theme("colors.indigo.600");
-  animation: fill 0.4s ease-in-out 0.4s forwards,
-    scale 0.3s ease-in-out 0.9s both;
+  stroke: #fff;
 }
-.checkmark__check {
+
+.mark.check {
+  box-shadow: inset 0px 0px 0px theme("colors.indigo.600");
+  animation: mark-fill 0.4s ease-in-out 0.4s forwards,
+    mark-scale 0.3s ease-in-out 0.9s both;
+}
+
+.mark.cross {
+  box-shadow: inset 0px 0px 0px theme("colors.rose.600");
+  animation: mark-fillred 0.4s ease-in-out 0.4s forwards,
+    mark-scale 0.3s ease-in-out 0.9s both;
+}
+.mark__path {
   transform-origin: 50% 50%;
   stroke-dasharray: 48;
   stroke-dashoffset: 48;
-  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+  animation: mark-stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
 }
-@keyframes stroke {
+.cross__path--right {
+  animation: 0.3s ease 0.8s normal forwards 1 running mark-stroke;
+}
+.cross__path--left {
+  animation: 1s ease 0.8s normal forwards 1 running mark-stroke;
+}
+@keyframes mark-stroke {
   100% {
     stroke-dashoffset: 0;
   }
 }
-@keyframes scale {
+@keyframes mark-scale {
   0%,
   100% {
     transform: none;
@@ -72,52 +94,12 @@
     transform: scale3d(1.1, 1.1, 1);
   }
 }
-@keyframes fill {
+@keyframes mark-fill {
   100% {
     box-shadow: inset 0px 0px 0px 30px theme("colors.indigo.600");
   }
 }
-
-.crossmark__circle {
-  stroke-dasharray: 166;
-  stroke-dashoffset: 166;
-  stroke-width: 2;
-  stroke-miterlimit: 10;
-  stroke: theme("colors.rose.600");
-  fill: none;
-  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
-}
-
-.crossmark {
-  border-radius: 50%;
-  stroke-width: 2;
-  stroke: theme("colors.rose.600");
-  stroke-miterlimit: 10;
-  box-shadow: inset 0px 0px 0px theme("colors.rose.600");
-  animation: fillred 0.4s ease-in-out 0.4s forwards,
-    scale 0.3s ease-in-out 0.9s both;
-}
-
-.crossmark__check {
-  transform-origin: 50% 50%;
-  stroke-dasharray: 48;
-  stroke-dashoffset: 48;
-  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
-}
-
-.cross__path {
-  stroke: #ffffff;
-  stroke-dasharray: 48;
-  stroke-dashoffset: 48;
-  transform-origin: 50% 50% 0;
-}
-.cross__path--right {
-  animation: 0.3s ease 0.8s normal forwards 1 running stroke;
-}
-.cross__path--left {
-  animation: 1s ease 0.8s normal forwards 1 running stroke;
-}
-@keyframes fillred {
+@keyframes mark-fillred {
   100% {
     box-shadow: inset 0px 0px 0px 30px theme("colors.rose.600");
   }
