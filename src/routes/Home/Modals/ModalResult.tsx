@@ -21,8 +21,10 @@ export default function ModalResult({
       {isSuccess ? (
         <>
           <Alert type="primary">Sertifikat terdaftar</Alert>
-          Sertifikat terdaftar di Profesi Keuangan Expo dengan data sebagai
-          berikut.
+          <p className="mt-2">
+            <strong>Sertifikat terdaftar</strong> di Profesi Keuangan Expo,
+            dengan data sebagai berikut.
+          </p>
           <table className="w-full mt-2">
             <tbody>
               <tr>
@@ -56,7 +58,9 @@ export default function ModalResult({
       ) : (
         <>
           <Alert type="secondary">Sertifikat tidak terdaftar</Alert>
-          Nomor sertifikat tidak terdaftar di Profesi Keuangan Expo.
+          <p className="mt-2">
+            Sertifikat tidak terdaftar di basis data Profesi Keuangan Expo.
+          </p>
         </>
       )}
     </Modal>
