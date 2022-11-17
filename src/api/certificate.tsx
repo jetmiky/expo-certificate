@@ -7,8 +7,10 @@ function encodeId(id: string) {
   return btoa(id);
 }
 
-export const addCertificate = async (certificate: Certificate) => {
-  return api.post("/certificates", { ...certificate });
+export const addCertificate = async (
+  certificate: Certificate | Certificate[]
+) => {
+  return api.post("/certificates", certificate);
 };
 
 export function search(id: string) {

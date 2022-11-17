@@ -1,5 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 
+// APIs
+import { addCertificate } from "../../../api/certificate";
+
 // Read Excel
 import readXlsx, { Schema } from "read-excel-file";
 
@@ -7,6 +10,9 @@ import readXlsx, { Schema } from "read-excel-file";
 import Modal from "../../../components/Modal";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
+
+// Types
+import Certificate from "../../../types/Certificate";
 
 interface Props {
   onToggle: Function;
@@ -16,6 +22,7 @@ export default function ModalBatchAdd(props: Props): JSX.Element {
   const { onToggle } = props;
 
   const [file, setFile] = useState<File | null>(null);
+  const [isSubmitLoading, setIsSubmitLoading] = useState(false);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!!e.target.files) setFile(e.target.files[0]);
@@ -23,6 +30,7 @@ export default function ModalBatchAdd(props: Props): JSX.Element {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitLoading(true);
 
     try {
       if (!!file) {
@@ -40,13 +48,18 @@ export default function ModalBatchAdd(props: Props): JSX.Element {
           throw new Error("Error found, please re-check Excel file.");
         }
 
-        console.log(rows);
+        await addCertificate(rows as Certificate[]);
+
+        alert("Add batch certificate success!");
+        onToggle();
       } else {
         throw new Error("File is not selected yet!");
       }
     } catch (error: Error | any) {
       console.log(error);
       alert(error.message ? error.message : "Unexpected error");
+    } finally {
+      setIsSubmitLoading(false);
     }
   };
 
@@ -63,7 +76,7 @@ export default function ModalBatchAdd(props: Props): JSX.Element {
           required
         />
 
-        <Button>Submit</Button>
+        <Button isLoading={isSubmitLoading}>Submit</Button>
       </form>
     </Modal>
   );
