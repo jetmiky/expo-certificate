@@ -32,9 +32,10 @@ export default function Home(): JSX.Element {
   const [searchResult, setSearchResult] = useState<Certificate | {}>({});
 
   useEffect(() => {
-    if (searchParams.get("code")) {
-      const code = searchParams.get("code") || "";
+    const code = searchParams.get("code");
+    if (typeof code === "string") {
       setCertificateCode(code);
+      handleSearch(code);
     }
   }, []);
 
@@ -42,12 +43,17 @@ export default function Home(): JSX.Element {
     setCertificateCode(e.target.value);
   };
 
-  const handleSearch = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    handleSearch(certificateCode);
+  };
+
+  const handleSearch = async (code: string) => {
     setIsLoading(true);
 
     try {
-      const response = await search(certificateCode);
+      const response = await search(code);
       const { certificate } = response.data;
 
       setSearchResult(certificate);
@@ -77,7 +83,7 @@ export default function Home(): JSX.Element {
           <form
             className="col-start-2 col-span-2 md:col-start-3"
             autoComplete="off"
-            onSubmit={handleSearch}
+            onSubmit={handleSubmit}
           >
             <div className="pt-8 pb-5">
               <Input
