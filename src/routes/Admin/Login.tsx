@@ -10,14 +10,8 @@ import { useNavigate } from "react-router-dom";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 
-interface Props {
-  setIsAuthenticated: Function;
-}
-
-export default function AdminLogin(props: Props): JSX.Element {
+export default function AdminLogin(): JSX.Element {
   const navigate = useNavigate();
-
-  const { setIsAuthenticated } = props;
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -42,7 +36,6 @@ export default function AdminLogin(props: Props): JSX.Element {
       await login(username, password);
       console.log("Admin login success!");
 
-      setIsAuthenticated(true);
       navigate("/admin/dashboard");
     } catch (error: Error | any) {
       alert(error.message);

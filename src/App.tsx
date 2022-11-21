@@ -40,10 +40,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/admin" element={<Admin />}>
-        <Route
-          index
-          element={<AdminLogin setIsAuthenticated={setIsAuthenticated} />}
-        />
+        <Route index element={<AdminLogin />} />
         <Route
           path="/admin/dashboard"
           element={
@@ -52,10 +49,7 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route
-          path="/admin/login"
-          element={<AdminLogin setIsAuthenticated={setIsAuthenticated} />}
-        />
+        <Route path="/admin/login" element={<AdminLogin />} />
       </Route>
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
