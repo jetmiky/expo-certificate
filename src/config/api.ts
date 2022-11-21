@@ -1,5 +1,4 @@
 import axios from "axios";
-import { auth } from "./firebase";
 
 const baseURL =
   import.meta.env.MODE === "production"
@@ -15,7 +14,6 @@ export const setAPIAuthorization = (token: string) => {
 
 export const removeAPIAuthorization = async () => {
   delete api.defaults.headers.common["Authorization"];
-  return await auth.signOut();
 };
 
 export default api;

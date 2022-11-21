@@ -18,6 +18,7 @@ export const login = async (username: string, password: string) => {
   }
 };
 
-export const logout = () => {
+export const logout = async () => {
   removeAPIAuthorization();
+  return await auth.signOut();
 };
