@@ -16,6 +16,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
-if (import.meta.env.MODE === "production") {
+if (import.meta.env.MODE === "development") {
   connectAuthEmulator(auth, "http://localhost:9099");
 }
