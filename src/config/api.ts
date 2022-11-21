@@ -1,4 +1,5 @@
 import axios from "axios";
+import { auth } from "./firebase";
 
 const baseURL =
   import.meta.env.MODE === "production"
@@ -9,13 +10,12 @@ const api = axios.create({ baseURL });
 
 export const setAPIAuthorization = (token: string) => {
   const authToken = `Bearer ${token}`;
-
-  window.localStorage.setItem("Authorization", token);
   api.defaults.headers.common["Authorization"] = authToken;
 };
 
-export const removeAPIAuthorization = () => {
-  window.localStorage.removeItem("Authorization");
+export const removeAPIAuthorization = async () => {
+  delete api.defaults.headers.common["Authorization"];
+  return await auth.signOut();
 };
 
 export default api;
