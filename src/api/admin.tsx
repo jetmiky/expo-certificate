@@ -1,18 +1,20 @@
-import { AxiosError } from "axios";
-import api, { setAuthorization, removeAuthorization } from "../config/api";
+import { setAuthorization, removeAuthorization } from "../config/api";
+
+// Firebase
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../config/firebase";
 
 export const login = async (username: string, password: string) => {
+  const emailSuffix = import.meta.env.VITE_LOGIN_EMAIL_SUFFIX;
+  const email = `${username}@${emailSuffix}`;
+
   try {
-    const response = await api.post("/admins/login", { username, password });
-    const token = response.data.token;
+    const { user } = await signInWithEmailAndPassword(auth, email, password);
+    const token = await user.getIdToken();
 
     setAuthorization(token);
-  } catch (error: AxiosError | any) {
-    if (error.response && error.response.status === 401) {
-      throw new Error("Login failed.");
-    }
-
-    throw new Error("Unexpected error occured.");
+  } catch (error) {
+    throw new Error("Login failed.");
   }
 };
 
