@@ -26,14 +26,13 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
   useEffect(() => {
-    onAuthStateChanged(auth, async (user) => {
-      if (!!user) {
-        const token = await user.getIdToken();
-        setAPIAuthorization(token);
-      }
-
-      return setIsAuthenticated(!!user);
-    });
+    // onAuthStateChanged(auth, async (user) => {
+    //   if (!!user) {
+    //     const token = await user.getIdToken();
+    //     setAPIAuthorization(token);
+    //   }
+    //   return setIsAuthenticated(!!user);
+    // });
   }, []);
 
   return (
