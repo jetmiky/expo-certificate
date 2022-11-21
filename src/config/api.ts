@@ -18,12 +18,4 @@ export const removeAPIAuthorization = () => {
   window.localStorage.removeItem("Authorization");
 };
 
-export const checkIsAuthorized = () => {
-  // TODO: Add method to check token validity
-  const token = window.localStorage.getItem("Authorization");
-  if (!!token) setAPIAuthorization(token);
-
-  return !!token;
-};
-
 export default api;
