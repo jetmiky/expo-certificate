@@ -7,21 +7,21 @@ const baseURL =
 
 const api = axios.create({ baseURL });
 
-export const setAuthorization = (token: string) => {
+export const setAPIAuthorization = (token: string) => {
   const authToken = `Bearer ${token}`;
 
   window.localStorage.setItem("Authorization", token);
   api.defaults.headers.common["Authorization"] = authToken;
 };
 
-export const removeAuthorization = () => {
+export const removeAPIAuthorization = () => {
   window.localStorage.removeItem("Authorization");
 };
 
 export const checkIsAuthorized = () => {
   // TODO: Add method to check token validity
   const token = window.localStorage.getItem("Authorization");
-  if (!!token) setAuthorization(token);
+  if (!!token) setAPIAuthorization(token);
 
   return !!token;
 };
