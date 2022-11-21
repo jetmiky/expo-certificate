@@ -6,6 +6,9 @@ import { logout } from "../../api/auth";
 // Router
 import { Link } from "react-router-dom";
 
+// Contexts
+import useAuthContext from "../../context/auth/useAuthContext";
+
 // Types
 import Certificate from "../../types/Certificate";
 
@@ -17,6 +20,8 @@ import ModalSearch from "./Modals/ModalSearch";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 
 export default function AdminDashboard(): JSX.Element {
+  // @ts-ignore
+  const { user } = useAuthContext();
   const [certificate, setCertificate] = useState<Certificate | {}>({});
 
   const [isModalAddShown, setIsModalAddShown] = useState(false);
@@ -44,7 +49,7 @@ export default function AdminDashboard(): JSX.Element {
   return (
     <main className="container">
       <div className="text-center">
-        <h2 className="text-indigo-800">Halo kawan!</h2>
+        <h2 className="text-indigo-800">Halo, {user.displayName}!</h2>
         <p>Apa yang mau kamu lakukan hari ini?</p>
       </div>
 
