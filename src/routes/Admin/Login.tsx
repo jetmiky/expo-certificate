@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 
 // APIs
-import { login } from "../../api/admin";
+import { login } from "../../api/auth";
 
 // Router
 import { useNavigate } from "react-router-dom";

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 // APIs
-import { logout } from "../../api/admin";
+import { logout } from "../../api/auth";
 
 // Router
 import { Link } from "react-router-dom";
