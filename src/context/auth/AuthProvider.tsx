@@ -30,9 +30,7 @@ const AuthProvider = ({ children }: Props) => {
     });
   }, []);
 
-  return (
-    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;

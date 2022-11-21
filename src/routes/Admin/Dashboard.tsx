@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import useAuthContext from "../../context/auth/useAuthContext";
 
 // Types
+import { User } from "firebase/auth";
 import Certificate from "../../types/Certificate";
 
 // Components
@@ -20,8 +21,7 @@ import ModalSearch from "./Modals/ModalSearch";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 
 export default function AdminDashboard(): JSX.Element {
-  // @ts-ignore
-  const { user } = useAuthContext();
+  const user = useAuthContext() as User;
   const [certificate, setCertificate] = useState<Certificate | {}>({});
 
   const [isModalAddShown, setIsModalAddShown] = useState(false);

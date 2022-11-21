@@ -9,8 +9,7 @@ interface Props {
 }
 
 export default function PrivateRoute(props: Props): JSX.Element {
-  // @ts-ignore
-  const { user } = useAuthContext();
+  const user = useAuthContext();
   const { children } = props;
 
   if (user === null) {
