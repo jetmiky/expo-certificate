@@ -34,6 +34,7 @@ export default function ModalSearch(props: Props): JSX.Element {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSearchLoading(true);
+    setCertificate({});
 
     try {
       const response = await search(id);
@@ -42,7 +43,6 @@ export default function ModalSearch(props: Props): JSX.Element {
       setCertificate(certificate);
     } catch (error: AxiosError | any) {
       if (error.response && error.response.status === 404) {
-        setCertificate({});
         return alert("Sertifikat tidak ditemukan!");
       }
 
@@ -92,7 +92,12 @@ export default function ModalSearch(props: Props): JSX.Element {
             required
           />
         </div>
-        <p className="text-sm">Tekan "Enter" untuk mencari sertifikat.</p>
+
+        {isSearchLoading ? (
+          <p className="text-sm">Sedang proses mencari sertifikat...</p>
+        ) : (
+          <p className="text-sm">Tekan "Enter" untuk mencari sertifikat.</p>
+        )}
 
         <button className="hidden">Cari</button>
       </form>
