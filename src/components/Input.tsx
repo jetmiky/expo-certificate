@@ -30,6 +30,7 @@ export default function Input(props: Props): JSX.Element {
           type={type}
           value={value}
           onChange={onChange}
+          {...rest}
         />
       </div>
     );
