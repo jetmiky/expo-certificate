@@ -1,7 +1,7 @@
 import { useState, useEffect, FormEvent, ChangeEvent } from "react";
 
 // APIs
-import { addCertificate } from "../../../api/certificate";
+import { addCertificate, editCertificate } from "../../../api/certificate";
 
 // Components
 import Modal from "../../../components/Modal";
@@ -60,12 +60,16 @@ export default function ModalAdd(props: Props): JSX.Element {
 
     try {
       const certificate: Certificate = { event, id, title, duration, name };
-      await addCertificate(certificate);
 
-      const message = isEditMode
-        ? "Edit sertifikat berhasil!"
-        : "Tambah sertifikat berhasil!";
-      alert(message);
+      let response: string;
+
+      if (isEditMode) {
+        response = await handleEdit(certificate);
+      } else {
+        response = await handleAdd(certificate);
+      }
+
+      alert(response);
 
       onResetCertificate();
       onToggle();
@@ -73,6 +77,33 @@ export default function ModalAdd(props: Props): JSX.Element {
       alert("Unexpected error occured");
     } finally {
       setIsSubmitLoading(false);
+    }
+  };
+
+  const handleAdd = async (certificate: Certificate) => {
+    try {
+      const response = await addCertificate(certificate);
+
+      let message: string;
+
+      if (!!response.data?.duplicates.length) {
+        message = "Sertifikat gagal ditambahkan karena duplikasi.";
+      } else {
+        message = "Tambah sertifikat berhasil!";
+      }
+
+      return message;
+    } catch (error) {
+      throw new Error("Unknown error occured.");
+    }
+  };
+
+  const handleEdit = async (certificate: Certificate) => {
+    try {
+      await editCertificate(certificate.id, certificate);
+      return "Edit sertifikat berhasil";
+    } catch (error) {
+      throw new Error("Unknown error occured.");
     }
   };
 
