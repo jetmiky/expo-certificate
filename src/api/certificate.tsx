@@ -3,10 +3,6 @@ import api from "../config/api";
 // Types
 import Certificate from "../types/Certificate";
 
-function encodeId(id: string) {
-  return btoa(id);
-}
-
 export const addCertificate = async (
   certificate: Certificate | Certificate[]
 ) => {
@@ -14,11 +10,9 @@ export const addCertificate = async (
 };
 
 export function search(id: string) {
-  const encodedCode = encodeId(id);
-  return api.get(`/certificates/${encodedCode}`);
+  return api.get(`/certificates/${id}`);
 }
 
 export async function deleteCertificate(id: string) {
-  const encodedCode = encodeId(id);
-  return api.delete(`/certificates/${encodedCode}`);
+  return api.delete(`/certificates/${id}`);
 }
