@@ -81,7 +81,7 @@ export default function ModalBatchAdd(props: Props): JSX.Element {
             accept="application/vnd.openxmlformats-officedoc'ument.spreadsheetml.sheet"
             required
           />
-          <p className="mt-1 text-sm italic">.XLSX (max 250 row)</p>
+          <p className="mt-1 text-sm italic">.XLSX (max 500 records)</p>
         </div>
 
         <div className="text-center">
