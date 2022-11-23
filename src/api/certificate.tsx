@@ -13,6 +13,10 @@ export function search(id: string) {
   return api.get(`/certificates/${id}`);
 }
 
+export function editCertificate(id: string, certificate: Certificate) {
+  return api.put(`/certificates/${id}`, certificate);
+}
+
 export async function deleteCertificate(id: string) {
   return api.delete(`/certificates/${id}`);
 }

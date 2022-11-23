@@ -78,10 +78,10 @@ export default function ModalBatchAdd(props: Props): JSX.Element {
             label="Data Sertifikat"
             name="file"
             onChange={handleFileChange}
-            accept="application/vnd.openxmlformats-officedoc'ument.spreadsheetml.sheet"
+            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             required
           />
-          <p className="mt-1 text-sm italic">.XLSX (max 250 row)</p>
+          <p className="mt-1 text-sm italic">.XLSX (max 500 records)</p>
         </div>
 
         <div className="text-center">
