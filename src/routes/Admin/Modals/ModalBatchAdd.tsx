@@ -49,9 +49,17 @@ export default function ModalBatchAdd(props: Props): JSX.Element {
           throw new Error("Error. Mohon cek kembali file Excel.");
         }
 
-        await addCertificate(rows as Certificate[]);
+        const response = await addCertificate(rows as Certificate[]);
 
-        alert("Tambah multiple sertifikat berhasil!");
+        let message = "Tambah multiple sertifikat selesai!";
+
+        if (response.data?.duplicates.length) {
+          message +=
+            "\nSebagian sertifikat gagal ditambahkan karena duplikasi:\n";
+          message += response.data.duplicates.join("\n");
+        }
+
+        alert(message);
         onToggle();
       } else {
         throw new Error("Pilih file terlebih dahulu!");
