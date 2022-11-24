@@ -92,6 +92,17 @@ export default function AdminDashboard(): JSX.Element {
         </div>
       </section>
 
+      <div className="text-center">
+        {data.certificate_count && (
+          <p className="text-sm">
+            Di database tercatat{" "}
+            <span className="text-indigo-700 font-bold">
+              {data.certificate_count} sertifikat.
+            </span>
+          </p>
+        )}
+      </div>
+
       <div className="mt-20 text-center">
         <Link
           to="/"
