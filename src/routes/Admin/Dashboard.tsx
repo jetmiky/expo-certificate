@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // APIs
+import { getDashboardData } from "../../api/dashboard";
 import { logout } from "../../api/auth";
 
 // Router
@@ -22,11 +23,25 @@ import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 
 export default function AdminDashboard(): JSX.Element {
   const user = useAuthContext() as User;
+  const [data, setData] = useState<any>({});
   const [certificate, setCertificate] = useState<Certificate | {}>({});
 
   const [isModalAddShown, setIsModalAddShown] = useState(false);
   const [isModalBatchAddShown, setIsModalBatchAddShown] = useState(false);
   const [isModalSearchShown, setIsModalSearchShown] = useState(false);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await getDashboardData();
+        setData(response.data);
+      } catch {
+        setData({});
+      }
+    };
+
+    getData();
+  }, []);
 
   const handleToggleModal = (modal: "add" | "batch" | "search") => () => {
     if (modal === "add") return setIsModalAddShown(!isModalAddShown);
