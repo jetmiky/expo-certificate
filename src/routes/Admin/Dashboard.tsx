@@ -21,9 +21,11 @@ import ModalBatchAdd from "./Modals/ModalBatchAdd";
 import ModalSearch from "./Modals/ModalSearch";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 
+type DashboardData = { certificateCount: number };
+
 export default function AdminDashboard(): JSX.Element {
   const user = useAuthContext() as User;
-  const [data, setData] = useState<any>({});
+  const [data, setData] = useState<DashboardData>({ certificateCount: 0 });
   const [certificate, setCertificate] = useState<Certificate | {}>({});
 
   const [isModalAddShown, setIsModalAddShown] = useState(false);
@@ -34,9 +36,10 @@ export default function AdminDashboard(): JSX.Element {
     const getData = async () => {
       try {
         const response = await getDashboardData();
-        setData(response.data);
+        const { certificate_count } = response.data;
+        setData({ certificateCount: certificate_count });
       } catch {
-        setData({});
+        alert("Gagal mendapatkan data dashboard.");
       }
     };
 
@@ -93,11 +96,11 @@ export default function AdminDashboard(): JSX.Element {
       </section>
 
       <div className="text-center">
-        {data.certificate_count && (
+        {data.certificateCount && (
           <p className="text-sm">
             Di database tercatat{" "}
             <span className="text-indigo-700 font-bold">
-              {data.certificate_count} sertifikat.
+              {data.certificateCount} sertifikat.
             </span>
           </p>
         )}
