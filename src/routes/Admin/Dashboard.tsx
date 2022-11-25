@@ -21,6 +21,9 @@ import ModalBatchAdd from "./Modals/ModalBatchAdd";
 import ModalSearch from "./Modals/ModalSearch";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 
+// Utils
+import { addSeparator } from "../../utils/numbers";
+
 type DashboardData = { certificateCount: number };
 
 export default function AdminDashboard(): JSX.Element {
@@ -100,7 +103,7 @@ export default function AdminDashboard(): JSX.Element {
           <p className="text-sm">
             Di database tercatat{" "}
             <span className="text-indigo-700 font-bold">
-              {data.certificateCount} sertifikat.
+              {addSeparator(data.certificateCount)} sertifikat.
             </span>
           </p>
         ) : null}
