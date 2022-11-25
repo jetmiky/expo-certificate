@@ -41,36 +41,51 @@ export default function ModalResult({
             </svg>
             Sertifikat terdaftar
           </Alert>
-          <p className="mt-2">
+          <p className="mt-2 mb-5 text-sm">
             <strong>Sertifikat terdaftar</strong> di Profesi Keuangan Expo,
             dengan data sebagai berikut.
           </p>
-          <table className="w-full mt-2">
+          <table className="table-auto border-separate border-spacing-0 w-full mt-2">
             <tbody>
               <tr>
-                <td>Nomor</td>
-                <td>:</td>
-                <td className="font-bold text-green-600">{searchResult.id}</td>
+                <td className="border border-slate-300 rounded-tl-md py-2 pl-2 pr-5 font-bold bg-gray-50">
+                  Nomor
+                </td>
+                <td className="border border-l-0 border-slate-300 rounded-tr-md py-2 px-3 font-bold text-green-600">
+                  {searchResult.id}
+                </td>
               </tr>
               <tr>
-                <td>Nama</td>
-                <td>:</td>
-                <td>{searchResult.name}</td>
+                <td className="border border-t-0 border-slate-300 py-2 pl-2 pr-5 font-bold bg-gray-50">
+                  Nama
+                </td>
+                <td className="border border-t-0 border-l-0 border-slate-300 py-2 px-3">
+                  {searchResult.name}
+                </td>
               </tr>
               <tr>
-                <td>Webinar</td>
-                <td>:</td>
-                <td>{searchResult.title}</td>
+                <td className="border border-t-0 border-slate-300 py-2 pl-2 pr-5 font-bold bg-gray-50">
+                  Webinar
+                </td>
+                <td className="border border-t-0 border-l-0 border-slate-300 py-2 px-3 leading-tight">
+                  {searchResult.title}
+                </td>
               </tr>
               <tr>
-                <td>Durasi</td>
-                <td>:</td>
-                <td>{searchResult.duration}</td>
+                <td className="border border-t-0 border-slate-300 py-2 pl-2 pr-5 font-bold bg-gray-50">
+                  Durasi
+                </td>
+                <td className="border border-t-0 border-l-0 border-slate-300 py-2 px-3">
+                  {searchResult.duration}
+                </td>
               </tr>
               <tr>
-                <td>Kegiatan</td>
-                <td>:</td>
-                <td>{searchResult.event}</td>
+                <td className="border border-t-0 border-slate-300 rounded-bl-md py-2 pl-2 pr-5 font-bold bg-gray-50">
+                  Kegiatan
+                </td>
+                <td className="border border-t-0 border-l-0 border-slate-300 rounded-br-md py-2 px-3">
+                  {searchResult.event}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -103,7 +118,7 @@ export default function ModalResult({
             </svg>
             Sertifikat tidak terdaftar
           </Alert>
-          <p className="mt-2">
+          <p className="mt-2 text-sm">
             Sertifikat tidak terdaftar di basis data Profesi Keuangan Expo.
           </p>
         </>
