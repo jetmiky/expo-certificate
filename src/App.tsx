@@ -1,3 +1,5 @@
+import { lazy, Suspense } from "react";
+
 // Configs
 import initializeIcon from "./config/icons";
 
@@ -6,7 +8,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 // Pages
 import Home from "./routes/Home";
-import Admin from "./routes/Admin";
+const Admin = lazy(() => import("./routes/Admin"));
 
 initializeIcon();
 
@@ -14,7 +16,14 @@ function App() {
   return (
     <Routes>
       <Route index element={<Home />} />
-      <Route path="/admin/*" element={<Admin />} />
+      <Route
+        path="/admin/*"
+        element={
+          <Suspense fallback={<p>Loading ...</p>}>
+            <Admin />
+          </Suspense>
+        }
+      />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
