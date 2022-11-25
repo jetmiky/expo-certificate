@@ -96,17 +96,17 @@ export default function AdminDashboard(): JSX.Element {
       </section>
 
       <div className="text-center">
-        {data.certificateCount && (
+        {!!data.certificateCount ? (
           <p className="text-sm">
             Di database tercatat{" "}
             <span className="text-indigo-700 font-bold">
               {data.certificateCount} sertifikat.
             </span>
           </p>
-        )}
+        ) : null}
       </div>
 
-      <div className="mt-20 text-center">
+      <div className="mt-10 text-center">
         <Link
           to="/"
           className="text-sm text-gray-500 underline-offset-8 hover:underline"
