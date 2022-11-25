@@ -1,7 +1,7 @@
 import { useState, useEffect, ReactNode } from "react";
 
 // Firebase
-import { User, onAuthStateChanged } from "firebase/auth";
+import { User, onAuthStateChanged, onIdTokenChanged } from "firebase/auth";
 import { auth } from "../../config/firebase";
 
 // Auth API
@@ -20,12 +20,18 @@ const AuthProvider = ({ children }: Props) => {
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (!!user) {
-        const token = await user.getIdToken();
-        setAPIAuthorization(token);
-
         setUser(user);
       } else {
         setUser(false);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    onIdTokenChanged(auth, async (user) => {
+      if (!!user) {
+        const token = await user.getIdToken();
+        setAPIAuthorization(token);
       }
     });
   }, []);
