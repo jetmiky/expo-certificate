@@ -5,7 +5,7 @@ import { User, onAuthStateChanged, onIdTokenChanged } from "firebase/auth";
 import { auth } from "../../config/firebase";
 
 // Auth API
-import { setAPIAuthorization } from "../../config/api";
+import { setAPIAuthorization, removeAPIAuthorization } from "../../config/api";
 
 // Context
 import AuthContext from "./AuthContext";
@@ -32,6 +32,8 @@ const AuthProvider = ({ children }: Props) => {
       if (!!user) {
         const token = await user.getIdToken();
         setAPIAuthorization(token);
+      } else {
+        removeAPIAuthorization();
       }
     });
   }, []);

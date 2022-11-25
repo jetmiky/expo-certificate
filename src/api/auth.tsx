@@ -1,5 +1,3 @@
-import { removeAPIAuthorization } from "../config/api";
-
 // Firebase
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
@@ -16,6 +14,5 @@ export const login = async (username: string, password: string) => {
 };
 
 export const logout = async () => {
-  removeAPIAuthorization();
   return await auth.signOut();
 };

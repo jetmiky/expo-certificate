@@ -12,7 +12,7 @@ export const setAPIAuthorization = (token: string) => {
   api.defaults.headers.common["Authorization"] = authToken;
 };
 
-export const removeAPIAuthorization = async () => {
+export const removeAPIAuthorization = () => {
   delete api.defaults.headers.common["Authorization"];
 };
 
