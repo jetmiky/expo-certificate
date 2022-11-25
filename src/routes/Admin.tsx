@@ -1,9 +1,14 @@
 // Router
-import { Outlet } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 
 // Components
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
+import PrivateRoute from "../components/PrivateRoute";
+
+// Pages
+import Login from "./Admin/Login";
+import Dashboard from "./Admin/Dashboard";
 
 export default function Admin() {
   return (
@@ -12,6 +17,19 @@ export default function Admin() {
         <Header />
         <h1 className="text-center text-xl mt-3">ADMINISTRATOR</h1>
       </header>
+
+      <Routes>
+        <Route index element={<Login />} />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/login" element={<Login />} />
+      </Routes>
 
       <Outlet />
 
