@@ -74,10 +74,15 @@ export default function Home(): JSX.Element {
       <Header />
 
       <main className="container pb-10">
-        <h1 className="text-center mb-1">Cek Sertifikat</h1>
-        <p className="text-center text-gray-400 px-10">
-          Cek keaslian sertifikat webinar Profesi Keuangan Expo
-        </p>
+        <div className="grid grid-cols-4 gap-2">
+          <div className="col-span-4 md:col-start-2 md:col-span-2">
+            <h1 className="text-center mb-1">Cek Sertifikat</h1>
+            <p className="text-center text-gray-400 px-10">
+              Cek keaslian sertifikat webinar Profesi Keuangan Expo, dengan
+              memasukkan nomor sertifikat pada isian berikut.
+            </p>
+          </div>
+        </div>
 
         <div className="grid grid-cols-4 gap-2 md:grid-cols-6">
           <form
