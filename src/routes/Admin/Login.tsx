@@ -4,7 +4,10 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { login } from "../../api/auth";
 
 // Router
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
+
+// Context
+import useAuthContext from "../../context/auth/useAuthContext";
 
 // Components
 import Input from "../../components/Input";
@@ -12,6 +15,7 @@ import Button from "../../components/Button";
 
 export default function AdminLogin(): JSX.Element {
   const navigate = useNavigate();
+  const user = useAuthContext();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -43,6 +47,12 @@ export default function AdminLogin(): JSX.Element {
       setIsLoading(false);
     }
   };
+
+  if (user === null) {
+    return <p>Loading ...</p>;
+  } else if (user) {
+    return <Navigate to="/admin/dashboard" replace />;
+  }
 
   return (
     <main className="container pb-10">
