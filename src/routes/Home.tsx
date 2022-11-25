@@ -90,7 +90,7 @@ export default function Home(): JSX.Element {
             autoComplete="off"
             onSubmit={handleSubmit}
           >
-            <div className="pt-8 pb-5">
+            <div className="pt-10 pb-5">
               <Input
                 name="certificate-code"
                 id="certificate-code"
