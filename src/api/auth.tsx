@@ -1,4 +1,4 @@
-import { setAPIAuthorization, removeAPIAuthorization } from "../config/api";
+import { removeAPIAuthorization } from "../config/api";
 
 // Firebase
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -9,10 +9,7 @@ export const login = async (username: string, password: string) => {
   const email = `${username}@${emailSuffix}`;
 
   try {
-    const { user } = await signInWithEmailAndPassword(auth, email, password);
-    const token = await user.getIdToken();
-
-    setAPIAuthorization(token);
+    await signInWithEmailAndPassword(auth, email, password);
   } catch (error) {
     throw new Error("Login failed.");
   }
