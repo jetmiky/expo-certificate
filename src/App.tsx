@@ -13,7 +13,7 @@ initializeIcon();
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route index element={<Home />} />
       <Route path="/admin/*" element={<Admin />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
