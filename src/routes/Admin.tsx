@@ -1,5 +1,5 @@
 // Router
-import { Routes, Route, Outlet } from "react-router-dom";
+import { Navigate, Routes, Route, Outlet } from "react-router-dom";
 
 // Components
 import Header from "../components/layout/Header";
@@ -29,6 +29,7 @@ export default function Admin() {
           }
         />
         <Route path="/login" element={<Login />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 
       <Outlet />

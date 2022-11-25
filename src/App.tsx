@@ -15,7 +15,7 @@ function App() {
     <Routes>
       <Route index element={<Home />} />
       <Route path="/admin/*" element={<Admin />} />
-      <Route path="*" element={<Navigate to="/" />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
