@@ -51,7 +51,7 @@ export default function ModalResult({
                 <td className="border border-slate-300 rounded-tl-md py-2 pl-2 pr-5 font-bold bg-gray-50">
                   Nomor
                 </td>
-                <td className="border border-l-0 border-slate-300 rounded-tr-md py-2 px-3 font-bold text-green-600">
+                <td className="border border-l-0 border-slate-300 rounded-tr-md py-2 px-3 font-bold text-green-600 leading-tight">
                   {searchResult.id}
                 </td>
               </tr>
@@ -59,7 +59,7 @@ export default function ModalResult({
                 <td className="border border-t-0 border-slate-300 py-2 pl-2 pr-5 font-bold bg-gray-50">
                   Nama
                 </td>
-                <td className="border border-t-0 border-l-0 border-slate-300 py-2 px-3">
+                <td className="border border-t-0 border-l-0 border-slate-300 py-2 px-3 leading-tight">
                   {searchResult.name}
                 </td>
               </tr>
@@ -75,7 +75,7 @@ export default function ModalResult({
                 <td className="border border-t-0 border-slate-300 py-2 pl-2 pr-5 font-bold bg-gray-50">
                   Durasi
                 </td>
-                <td className="border border-t-0 border-l-0 border-slate-300 py-2 px-3">
+                <td className="border border-t-0 border-l-0 border-slate-300 py-2 px-3 leading-tight">
                   {searchResult.duration}
                 </td>
               </tr>
@@ -83,7 +83,7 @@ export default function ModalResult({
                 <td className="border border-t-0 border-slate-300 rounded-bl-md py-2 pl-2 pr-5 font-bold bg-gray-50">
                   Kegiatan
                 </td>
-                <td className="border border-t-0 border-l-0 border-slate-300 rounded-br-md py-2 px-3">
+                <td className="border border-t-0 border-l-0 border-slate-300 rounded-br-md py-2 px-3 leading-tight">
                   {searchResult.event}
                 </td>
               </tr>
