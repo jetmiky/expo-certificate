@@ -2,14 +2,12 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@layer base {
-  @font-face {
-    font-family: "Roboto";
-    src: url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
-  }
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
+@layer base {
   body {
     @apply font-sans text-sm md:text-base;
+    font-family: "Roboto", sans-serif;
   }
 
   h1 {
