@@ -5,6 +5,7 @@ interface Props
     ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
   > {
+  size?: "small" | "medium";
   theme?: "indigo" | "green" | "rose";
   isLoading?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
@@ -13,6 +14,7 @@ interface Props
 
 export default function Button(props: Props): JSX.Element {
   const {
+    size = "medium",
     theme = "indigo",
     isLoading = false,
     disabled = false,
@@ -21,28 +23,40 @@ export default function Button(props: Props): JSX.Element {
     ...rest
   } = props;
 
-  let classes: string;
+  let colorClasses: string;
+  let sizeClasses: string;
 
   switch (theme) {
     case "indigo":
-      classes =
+      colorClasses =
         "bg-indigo-500 shadow-indigo-200 hover:bg-indigo-600 focus:bg-indigo-600 focus:ring-indigo-600 disabled:bg-indigo-400/80";
       break;
     case "green":
-      classes =
+      colorClasses =
         "bg-green-500 shadow-green-200 hover:bg-green-600 focus:bg-green-600 focus:ring-green-600 disabled:bg-green-400/80";
       break;
     case "rose":
-      classes =
+      colorClasses =
         "bg-rose-500 shadow-rose-200 hover:bg-rose-600 focus:bg-rose-600 focus:ring-rose-600 disabled:bg-rose-400/80";
       break;
     default:
-      classes = "";
+      colorClasses = "";
+  }
+
+  switch (size) {
+    case "small":
+      sizeClasses = "text-sm";
+      break;
+    case "medium":
+      sizeClasses = "text-base";
+      break;
+    default:
+      sizeClasses = "";
   }
 
   return (
     <button
-      className={`${classes} px-4 py-2 outline-none rounded text-white shadow-lg font-medium active:shadow-none active:scale-95 focus:ring-2 focus:ring-offset-2 disabled:shadow-none disabled:cursor-not-allowed transition-all transition-ease-in duration-200 transform hover:-translate-y-1 active:translate-y-0`}
+      className={`${colorClasses} ${sizeClasses} px-4 py-2 font-medium outline-none rounded text-white shadow-lg active:shadow-none active:scale-95 focus:ring-2 focus:ring-offset-2 disabled:shadow-none disabled:cursor-not-allowed transition-all transition-ease-in duration-200 transform hover:-translate-y-1 active:translate-y-0`}
       onClick={onClick}
       disabled={disabled || isLoading}
       {...rest}
