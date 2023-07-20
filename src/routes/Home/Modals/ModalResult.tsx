@@ -1,6 +1,8 @@
 // Components
 import Modal from "../../../components/Modal";
 import Alert from "../../../components/Alert";
+import Button from "../../../components/Button";
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 
 // Types
 import Certificate, { instanceOfCertificate } from "../../../types/Certificate";
@@ -89,6 +91,12 @@ export default function ModalResult({
               </tr>
             </tbody>
           </table>
+          <div className="mt-3">
+            <Button theme="green">
+              <Icon icon="cloud-download-alt" className="mr-2"></Icon>
+              Lihat Sertifikat
+            </Button>
+          </div>
         </>
       ) : (
         <>
