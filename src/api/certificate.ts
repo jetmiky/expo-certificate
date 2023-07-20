@@ -20,3 +20,7 @@ export function editCertificate(id: string, certificate: Certificate) {
 export async function deleteCertificate(id: string) {
   return api.delete(`/certificates/${id}`);
 }
+
+export async function download(id: string) {
+  return api.get(`/download/${id}`, { responseType: "blob" });
+}

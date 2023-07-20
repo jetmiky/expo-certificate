@@ -1,3 +1,8 @@
+import { useState } from "react";
+
+// API
+import { download } from "../../../api/certificate";
+
 // Components
 import Modal from "../../../components/Modal";
 import Alert from "../../../components/Alert";
@@ -12,11 +17,47 @@ interface Props {
   searchResult: Certificate | {};
 }
 
+function handleDownloadBlob(blob: Blob, filename: string) {
+  const blobUrl = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = blobUrl;
+  link.download = filename;
+
+  document.body.appendChild(link);
+
+  link.dispatchEvent(
+    new MouseEvent("click", {
+      bubbles: true,
+      cancelable: true,
+      view: window,
+    })
+  );
+
+  document.body.removeChild(link);
+}
+
 export default function ModalResult({
   onToggle,
   searchResult,
 }: Props): JSX.Element {
+  const [isDownloadLoading, setIsDownloadLoading] = useState(false);
   const isSuccess = instanceOfCertificate(searchResult);
+
+  const handleDownload = async () => {
+    if (instanceOfCertificate(searchResult)) {
+      try {
+        setIsDownloadLoading(true);
+
+        const { data } = await download(searchResult.id);
+        handleDownloadBlob(data, searchResult.id);
+      } catch (error: any) {
+        alert("We are sorry, unexpected error happened.");
+      } finally {
+        setIsDownloadLoading(false);
+      }
+    }
+  };
 
   return (
     <Modal onToggle={onToggle} title="Cek Sertifikat">
@@ -91,10 +132,15 @@ export default function ModalResult({
               </tr>
             </tbody>
           </table>
-          <div className="mt-3">
-            <Button theme="green">
+          <div className="mt-3 text-center">
+            <Button
+              theme="green"
+              size="small"
+              onClick={handleDownload}
+              isLoading={isDownloadLoading}
+            >
               <Icon icon="cloud-download-alt" className="mr-2"></Icon>
-              Lihat Sertifikat
+              Unduh Sertifikat
             </Button>
           </div>
         </>
