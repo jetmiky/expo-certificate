@@ -10,7 +10,7 @@ export const addCertificate = async (
 };
 
 export function search(id: string) {
-  return api.get(`/certificates/${id}`);
+  return api.get(`/certificates/find/${id}`);
 }
 
 export function editCertificate(id: string, certificate: Certificate) {
@@ -22,5 +22,5 @@ export async function deleteCertificate(id: string) {
 }
 
 export async function download(id: string) {
-  return api.get(`/download/${id}`, { responseType: "blob" });
+  return api.get(`/certificates/download/${id}`, { responseType: "blob" });
 }
