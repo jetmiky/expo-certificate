@@ -6,7 +6,7 @@ import Certificate from "../types/Certificate";
 export const addCertificate = async (
   certificate: Certificate | Certificate[]
 ) => {
-  return api.post("/certificates", certificate);
+  return api.post("/frontend/certificates", certificate);
 };
 
 export function search(id: string) {
@@ -14,11 +14,11 @@ export function search(id: string) {
 }
 
 export function editCertificate(id: string, certificate: Certificate) {
-  return api.put(`/certificates/${id}`, certificate);
+  return api.put(`/frontend/certificates/${id}`, certificate);
 }
 
 export async function deleteCertificate(id: string) {
-  return api.delete(`/certificates/${id}`);
+  return api.delete(`/frontend/certificates/${id}`);
 }
 
 export async function download(id: string) {
