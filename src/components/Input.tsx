@@ -12,6 +12,7 @@ interface Props
   id: string;
   label: string;
   name: string;
+  help?: string;
   onChange?: FormEventHandler;
 }
 
@@ -23,6 +24,7 @@ export default function Input(props: Props): JSX.Element {
     value,
     onChange,
     disabled,
+    help,
     ...rest
   } = props;
 
@@ -66,6 +68,7 @@ export default function Input(props: Props): JSX.Element {
       >
         {label}
       </label>
+      {help ? <small className="text-xs">{help}</small> : null}
     </div>
   );
 }
