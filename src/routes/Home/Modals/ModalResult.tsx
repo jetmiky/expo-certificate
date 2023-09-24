@@ -12,29 +12,12 @@ import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 // Types
 import Certificate, { instanceOfCertificate } from "../../../types/Certificate";
 
+// Utils
+import { handleDownloadBlob } from "../../../utils/blob";
+
 interface Props {
   onToggle: Function;
   searchResult: Certificate | {};
-}
-
-function handleDownloadBlob(blob: Blob, filename: string) {
-  const blobUrl = URL.createObjectURL(blob);
-
-  const link = document.createElement("a");
-  link.href = blobUrl;
-  link.download = filename;
-
-  document.body.appendChild(link);
-
-  link.dispatchEvent(
-    new MouseEvent("click", {
-      bubbles: true,
-      cancelable: true,
-      view: window,
-    })
-  );
-
-  document.body.removeChild(link);
 }
 
 export default function ModalResult({

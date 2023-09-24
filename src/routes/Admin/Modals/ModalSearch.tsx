@@ -5,13 +5,16 @@ import Certificate, { instanceOfCertificate } from "../../../types/Certificate";
 
 // APIs
 import { AxiosError } from "axios";
-import { search, deleteCertificate } from "../../../api/certificate";
+import { search, deleteCertificate, download } from "../../../api/certificate";
 
 // Components
 import Modal from "../../../components/Modal";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
+
+// Utils
+import { handleDownloadBlob } from "../../../utils/blob";
 
 interface Props {
   onToggle: Function;
@@ -26,6 +29,7 @@ export default function ModalSearch(props: Props): JSX.Element {
 
   const [isSearchLoading, setIsSearchLoading] = useState(false);
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
+  const [isDownloadLoading, setIsDownloadLoading] = useState(false);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setId(e.target.value);
@@ -77,6 +81,21 @@ export default function ModalSearch(props: Props): JSX.Element {
     }
   };
 
+  const handleDownload = async () => {
+    if (instanceOfCertificate(certificate)) {
+      try {
+        setIsDownloadLoading(true);
+
+        const { data } = await download(certificate.id);
+        handleDownloadBlob(data, certificate.id);
+      } catch (error: any) {
+        alert("We are sorry, unexpected error happened.");
+      } finally {
+        setIsDownloadLoading(false);
+      }
+    }
+  };
+
   return (
     <Modal title="Cari Sertifikat" onToggle={onToggle}>
       <form onSubmit={handleSubmit} autoComplete="off">
@@ -111,6 +130,17 @@ export default function ModalSearch(props: Props): JSX.Element {
             <br />
             Pilih salah satu aksi berikut.
           </p>
+
+          <div className="mt-2 text-center">
+            <Button
+              theme="green"
+              onClick={handleDownload}
+              isLoading={isDownloadLoading}
+            >
+              <Icon icon="cloud-download-alt" className="mr-3" />
+              Download
+            </Button>
+          </div>
 
           <div className="mt-2 grid grid-cols-2 gap-2">
             <Button onClick={handleEdit}>
