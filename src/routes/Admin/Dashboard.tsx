@@ -101,10 +101,11 @@ export default function AdminDashboard(): JSX.Element {
       <div className="text-center">
         {!!data.certificateCount ? (
           <p className="text-sm">
-            Di database tercatat{" "}
+            Total tercatat{" "}
             <span className="text-indigo-700 font-bold">
-              {addSeparator(data.certificateCount)} sertifikat.
-            </span>
+              {addSeparator(data.certificateCount)} sertifikat
+            </span>{" "}
+            di Database.
           </p>
         ) : null}
       </div>
