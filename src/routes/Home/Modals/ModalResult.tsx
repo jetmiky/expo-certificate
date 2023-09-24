@@ -91,10 +91,18 @@ export default function ModalResult({
           <table className="table-auto border-separate border-spacing-0 w-full mt-2">
             <tbody>
               <tr>
-                <td className="border border-slate-300 rounded-tl-md py-2 pl-2 pr-5 font-bold bg-gray-50">
+                <td
+                  className="border rounded-tl-md rounded-tr-md border-slate-300 py-2 px-3 font-bold text-center text-green-600 bg-gray-100"
+                  colSpan={2}
+                >
+                  {searchResult.event}
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-t-0 border-slate-300 py-2 pl-2 pr-5 font-bold bg-gray-50">
                   Nomor
                 </td>
-                <td className="border border-l-0 border-slate-300 rounded-tr-md py-2 px-3 font-bold text-green-600 leading-tight">
+                <td className="border border-t-0 border-l-0 border-slate-300 py-2 px-3 leading-tight">
                   {searchResult.id}
                 </td>
               </tr>
@@ -108,31 +116,23 @@ export default function ModalResult({
               </tr>
               <tr>
                 <td className="border border-t-0 border-slate-300 py-2 pl-2 pr-5 font-bold bg-gray-50">
-                  Webinar
+                  Kegiatan
                 </td>
                 <td className="border border-t-0 border-l-0 border-slate-300 py-2 px-3 leading-tight">
-                  {searchResult.title}
-                </td>
-              </tr>
-              <tr>
-                <td className="border border-t-0 border-slate-300 py-2 pl-2 pr-5 font-bold bg-gray-50">
-                  Durasi
-                </td>
-                <td className="border border-t-0 border-l-0 border-slate-300 py-2 px-3 leading-tight">
-                  {searchResult.duration}
+                  {searchResult.role + " " + searchResult.title}
                 </td>
               </tr>
               <tr>
                 <td className="border border-t-0 border-slate-300 rounded-bl-md py-2 pl-2 pr-5 font-bold bg-gray-50">
-                  Kegiatan
+                  Durasi
                 </td>
                 <td className="border border-t-0 border-l-0 border-slate-300 rounded-br-md py-2 px-3 leading-tight">
-                  {searchResult.event}
+                  {searchResult.duration}
                 </td>
               </tr>
             </tbody>
           </table>
-          <div className="mt-3 text-center">
+          <div className="mt-4 text-center">
             <Button
               theme="green"
               size="small"
