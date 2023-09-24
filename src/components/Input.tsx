@@ -16,7 +16,15 @@ interface Props
 }
 
 export default function Input(props: Props): JSX.Element {
-  const { type = "text", label, id, value, onChange, ...rest } = props;
+  const {
+    type = "text",
+    label,
+    id,
+    value,
+    onChange,
+    disabled,
+    ...rest
+  } = props;
 
   if (type === "file") {
     return (
@@ -36,15 +44,20 @@ export default function Input(props: Props): JSX.Element {
     );
   }
 
+  let className =
+    "peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-indigo-500";
+  if (disabled) className += " disabled py-1";
+
   return (
     <div className="relative">
       <input
         id={id}
         placeholder={label}
-        className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-indigo-500"
+        className={className}
         value={value}
         onChange={onChange}
         type={type}
+        disabled={disabled}
         {...rest}
       />
       <label
