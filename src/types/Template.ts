@@ -1,0 +1,6 @@
+interface Template {
+  id: string;
+  name: string;
+}
+
+export default Template;

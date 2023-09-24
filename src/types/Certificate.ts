@@ -6,6 +6,7 @@ interface Certificate {
   duration: string;
   date: string;
   event: string;
+  template: string;
 }
 
 export function instanceOfCertificate(object: any): object is Certificate {
@@ -17,7 +18,8 @@ export function instanceOfCertificate(object: any): object is Certificate {
     typeof object.role === "string" &&
     typeof object.duration === "string" &&
     typeof object.date === "string" &&
-    typeof object.event === "string"
+    typeof object.event === "string" &&
+    typeof object.template === "string"
   );
 }
 
