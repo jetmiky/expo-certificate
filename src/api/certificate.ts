@@ -3,9 +3,7 @@ import api from "../config/api";
 // Types
 import Certificate from "../types/Certificate";
 
-export const addCertificate = async (
-  certificate: Certificate | Certificate[]
-) => {
+export const addCertificate = async (certificate: Certificate) => {
   return api.post("/frontend/certificates", certificate);
 };
 
