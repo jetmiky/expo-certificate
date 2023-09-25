@@ -1,7 +1,7 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState, useEffect } from "react";
 
 // APIs
-import { addCertificate } from "../../../api/certificate";
+import { addBatchCertificate, getTemplates } from "../../../api/certificate";
 
 // Read Excel
 import readXlsx, { Schema } from "read-excel-file";
@@ -9,11 +9,16 @@ import readXlsx, { Schema } from "read-excel-file";
 // Components
 import Modal from "../../../components/Modal";
 import Input from "../../../components/Input";
+import Select from "../../../components/Select";
 import Button from "../../../components/Button";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 
 // Types
 import Certificate from "../../../types/Certificate";
+import Template from "../../../types/Template";
+
+// Utils
+import { handleDownloadTxt } from "../../../utils/blob";
 
 interface Props {
   onToggle: Function;
@@ -22,11 +27,28 @@ interface Props {
 export default function ModalBatchAdd(props: Props): JSX.Element {
   const { onToggle } = props;
 
+  const [templates, setTemplates] = useState<Template[]>([]);
   const [file, setFile] = useState<File | null>(null);
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
+  const [template, setTemplate] = useState("");
+
+  useEffect(() => {
+    const getAsyncTemplates = async () => {
+      const response = await getTemplates();
+      setTemplates(response.data.templates);
+      setTemplate(response.data.templates[0].id);
+    };
+
+    getAsyncTemplates();
+  }, []);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!!e.target.files) setFile(e.target.files[0]);
+  };
+
+  const handleSelectChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setTemplate(value);
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -36,11 +58,12 @@ export default function ModalBatchAdd(props: Props): JSX.Element {
     try {
       if (!!file) {
         const schema: Schema = {
-          KEGIATAN: { prop: "event", type: String, required: true },
-          "NOMOR SERTIFIKAT": { prop: "id", type: String, required: true },
-          "JUDUL WEBINAR": { prop: "title", type: String, required: true },
-          "DURASI WEBINAR": { prop: "duration", type: String, required: true },
-          "NAMA PESERTA": { prop: "name", type: String, required: true },
+          EXPO: { prop: "event", type: String, required: true },
+          "JUDUL KEGIATAN": { prop: "title", type: String, required: true },
+          "DURASI KEGIATAN": { prop: "duration", type: String, required: true },
+          NAMA: { prop: "name", type: String, required: true },
+          ROLE: { prop: "role", type: String, required: true },
+          "TANGGAL SERTIFIKAT": { prop: "date", type: String, required: true },
         };
         const readOptions = { sheet: 1, schema };
 
@@ -49,17 +72,18 @@ export default function ModalBatchAdd(props: Props): JSX.Element {
           throw new Error("Error. Mohon cek kembali file Excel.");
         }
 
-        const response = await addCertificate(rows as Certificate[]);
+        const {
+          data: { certificates },
+        } = await addBatchCertificate(template, rows as Certificate[]);
 
-        let message = "Tambah multiple sertifikat selesai!";
+        let logs = "";
+        certificates.forEach((certificate) => {
+          logs += `${certificate.id} - ${certificate.name} - ${certificate.title}\n`;
+        });
 
-        if (response.data?.duplicates.length) {
-          message +=
-            "\nSebagian sertifikat gagal ditambahkan karena duplikasi:\n";
-          message += response.data.duplicates.join("\n");
-        }
+        handleDownloadTxt(logs, "logs.txt");
 
-        alert(message);
+        alert("Tambah multiple sertifikat selesai!");
         onToggle();
       } else {
         throw new Error("Pilih file terlebih dahulu!");
@@ -78,7 +102,33 @@ export default function ModalBatchAdd(props: Props): JSX.Element {
 
   return (
     <Modal title="Batch Add Certificate" onToggle={onToggle}>
+      <div className="text-center">
+        <p className="mb-2">Download template excel contoh berikut.</p>
+
+        <Button theme="green" onClick={handleDownloadTemplate}>
+          <Icon icon="file-excel" className="mr-3" />
+          Download Template
+        </Button>
+      </div>
+
+      <hr className="my-5" />
+
       <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <Select
+            id="template"
+            name="template"
+            label="Pilih Template Sertifikat"
+            value={template}
+            onChange={handleSelectChange}
+          >
+            {templates.map(({ id, name }) => (
+              <option key={id} value={id}>
+                {name}
+              </option>
+            ))}
+          </Select>
+        </div>
         <div className="mb-4">
           <Input
             type="file"
@@ -99,17 +149,6 @@ export default function ModalBatchAdd(props: Props): JSX.Element {
           </Button>
         </div>
       </form>
-
-      <hr className="my-5" />
-
-      <div className="text-center">
-        <p className="mb-2">Download template excel contoh berikut.</p>
-
-        <Button theme="green" onClick={handleDownloadTemplate}>
-          <Icon icon="file-excel" className="mr-3" />
-          Download Template
-        </Button>
-      </div>
     </Modal>
   );
 }

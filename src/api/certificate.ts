@@ -1,10 +1,18 @@
 import api from "../config/api";
+import { AxiosResponse } from "axios";
 
 // Types
 import Certificate from "../types/Certificate";
 
 export const addCertificate = async (certificate: Certificate) => {
   return api.post("/frontend/certificates", certificate);
+};
+
+export const addBatchCertificate = async (
+  template: string,
+  certificates: Certificate[]
+): Promise<AxiosResponse<{ certificates: Certificate[] }>> => {
+  return api.post("/frontend/certificates/batch", { template, certificates });
 };
 
 export function search(id: string) {

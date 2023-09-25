@@ -17,3 +17,8 @@ export function handleDownloadBlob(blob: Blob, filename: string) {
 
   document.body.removeChild(link);
 }
+
+export function handleDownloadTxt(text: string, filename: string) {
+  const file = new Blob([text], { type: "text/plain" });
+  return handleDownloadBlob(file, filename);
+}
